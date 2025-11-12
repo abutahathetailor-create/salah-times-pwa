@@ -1,1 +1,139 @@
 
+/* Sunrise-specific styles */
+.prayer-card[data-prayer="Sunrise"] {
+    background: linear-gradient(135deg, 
+        #ff6b35 0%, 
+        #ff8e53 20%, 
+        #ffb174 40%, 
+        #ffd166 60%, 
+        #f9f7f3 80%, 
+        #a8e6cf 100%);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: left;
+    padding-left: 20px;
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+}
+
+.prayer-card[data-prayer="Sunrise"] .prayer-name {
+    justify-content: flex-start;
+    color: #7c4700;
+    font-size: 1.2rem;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.prayer-card[data-prayer="Sunrise"] .prayer-name i {
+    color: #ff6b35;
+    filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6));
+}
+
+.prayer-card[data-prayer="Sunrise"] .prayer-time {
+    color: #d35400;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+    font-weight: 800;
+}
+
+/* Sun rays animation */
+.sun-rays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.ray {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: rayMove 8s linear infinite;
+}
+
+.ray:nth-child(1) { top: 20%; left: -50%; width: 200%; height: 2px; animation-delay: 0s; }
+.ray:nth-child(2) { top: 40%; left: -50%; width: 200%; height: 1px; animation-delay: 2s; }
+.ray:nth-child(3) { top: 60%; left: -50%; width: 200%; height: 1.5px; animation-delay: 4s; }
+.ray:nth-child(4) { top: 80%; left: -50%; width: 200%; height: 1px; animation-delay: 6s; }
+
+@keyframes rayMove {
+    0% { transform: translateX(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* Sun disc */
+.prayer-card[data-prayer="Sunrise"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #ff6b35 0%, #ff8e53 50%, transparent 70%);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    animation: sunPulse 4s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+}
+
+@keyframes sunPulse {
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.1); }
+}
+
+/* Cloud animation */
+.clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    animation: cloudFloat 20s linear infinite;
+    filter: blur(1px);
+}
+
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.cloud:nth-child(1) {
+    top: 20%; left: -50px;
+    width: 40px; height: 20px;
+    animation-duration: 25s;
+}
+.cloud:nth-child(1)::before { top: -8px; left: 5px; width: 25px; height: 25px; }
+.cloud:nth-child(1)::after { top: -5px; right: 5px; width: 20px; height: 20px; }
+
+.cloud:nth-child(2) {
+    top: 60%; left: -80px;
+    width: 60px; height: 25px;
+    animation-duration: 30s;
+    animation-delay: 5s;
+}
+.cloud:nth-child(2)::before { top: -10px; left: 8px; width: 30px; height: 30px; }
+.cloud:nth-child(2)::after { top: -8px; right: 8px; width: 25px; height: 25px; }
+
+@keyframes cloudFloat {
+    0% { transform: translateX(-100px); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateX(calc(100% + 100px)); opacity: 0; }
+}
+
+/* Mobile optimization */
+@media (max-width: 400px) {
+    .prayer-card[data-prayer="Sunrise"] {
+        padding-left: 15px;
+    }
+}
