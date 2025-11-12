@@ -1,4 +1,5 @@
-const CACHE_NAME = 'salah-times-v2.0';
+// Update this line in sw.js
+const CACHE_NAME = 'salah-times-v2.1'; // Change version number
 const urlsToCache = [
   './',
   './index.html',
@@ -51,3 +52,4 @@ self.addEventListener('activate', function(event) {
     })
   );
 });
+
