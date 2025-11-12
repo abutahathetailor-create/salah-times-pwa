@@ -1,1 +1,126 @@
+/* Asr-specific styles */
+.prayer-card[data-prayer="Asr"] {
+    background: linear-gradient(135deg, 
+        #FFA500 0%, 
+        #FFB74D 20%, 
+        #FFCC80 40%, 
+        #FFE0B2 60%, 
+        #FFF3E0 80%, 
+        #E8F4F8 100%);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: right;
+    padding-right: 20px;
+    box-shadow: 0 8px 32px rgba(255, 165, 0, 0.3);
+}
 
+.prayer-card[data-prayer="Asr"] .prayer-name {
+    justify-content: flex-end;
+    color: #7d4e00;
+    font-size: 1.2rem;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.prayer-card[data-prayer="Asr"] .prayer-name i {
+    color: #e65100;
+    filter: drop-shadow(0 0 6px rgba(230, 81, 0, 0.6));
+}
+
+.prayer-card[data-prayer="Asr"] .prayer-time {
+    color: #e65100;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+    font-weight: 800;
+}
+
+/* Setting sun */
+.prayer-card[data-prayer="Asr"]::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #FF9800 0%, #FF5722 30%, transparent 70%);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: settingSun 8s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(255, 152, 0, 0.5);
+}
+
+@keyframes settingSun {
+    0%, 100% { bottom: -30px; opacity: 0.8; }
+    50% { bottom: -20px; opacity: 1; }
+}
+
+/* Long shadows */
+.shadow-rays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.shadow-ray {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent);
+    transform-origin: left bottom;
+    animation: shadowStretch 6s ease-in-out infinite;
+}
+
+.shadow-ray:nth-child(1) { 
+    bottom: 0; left: 20%; 
+    width: 60%; height: 2px; 
+    transform: rotate(-15deg);
+    animation-delay: 0s;
+}
+.shadow-ray:nth-child(2) { 
+    bottom: 0; left: 40%; 
+    width: 50%; height: 1.5px; 
+    transform: rotate(-30deg);
+    animation-delay: 2s;
+}
+.shadow-ray:nth-child(3) { 
+    bottom: 0; left: 60%; 
+    width: 40%; height: 1px; 
+    transform: rotate(-45deg);
+    animation-delay: 4s;
+}
+
+@keyframes shadowStretch {
+    0%, 100% { opacity: 0.3; transform: rotate(-15deg) scaleX(0.8); }
+    50% { opacity: 0.6; transform: rotate(-15deg) scaleX(1.2); }
+}
+
+/* Golden particles */
+.golden-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(255, 215, 0, 0.6);
+    border-radius: 50%;
+    animation: particleFloat 10s linear infinite;
+}
+
+.particle:nth-child(1) { top: 20%; left: 10%; width: 3px; height: 3px; animation-delay: 0s; }
+.particle:nth-child(2) { top: 40%; left: 30%; width: 2px; height: 2px; animation-delay: 3s; }
+.particle:nth-child(3) { top: 60%; left: 50%; width: 4px; height: 4px; animation-delay: 6s; }
+.particle:nth-child(4) { top: 80%; left: 70%; width: 2px; height: 2px; animation-delay: 9s; }
+.particle:nth-child(5) { top: 30%; left: 80%; width: 3px; height: 3px; animation-delay: 12s; }
+
+@keyframes particleFloat {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
