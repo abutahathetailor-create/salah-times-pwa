@@ -1,4 +1,4 @@
-// MAIN APP LOADER - FIXED VERSION
+// MAIN APP LOADER WITH API INTEGRATION
 (function() {
     'use strict';
     
@@ -6,20 +6,171 @@
     
     // Global app namespace
     window.SalahTimes = {
+        // Configuration
+        config: {
+            JUBAIL_LAT: 27.0040,
+            JUBAIL_LNG: 49.6460,
+            API_METHOD: 4, // University of Islamic Sciences, Karachi
+            API_ENDPOINTS: [
+                'https://api.aladhan.com/v1/timings/{date}?latitude={lat}&longitude={lng}&method={method}',
+                'https://api.aladhan.com/v1/timings/{date}?latitude={lat}&longitude={lng}&method={method}&school=1'
+            ]
+        },
+        
+        // Default fallback times (will be replaced by API)
+        defaultPrayerTimes: {
+            Fajr: "04:15 AM",
+            Sunrise: "05:35 AM", 
+            Dhuhr: "11:55 AM",
+            Asr: "03:25 PM",
+            Maghrib: "06:15 PM",
+            Isha: "07:45 PM"
+        },
+        
+        currentPrayerTimes: {},
+        
         init: function() {
             console.log('✅ Initializing Salah Times App...');
             
-            // Set initial date and Hijri date
+            // Set initial date
             this.updateDateInfo(new Date());
-            this.setHijriDate('7 Jumada al-Thani 1445 AH');
             
-            // Render prayer times
-            this.renderPrayerTimes();
+            // Show loading state
+            this.showLoadingState();
+            
+            // Load prayer times from API
+            this.loadPrayerTimesFromAPI();
             
             // Start timers
             this.startTimers();
+        },
+        
+        showLoadingState: function() {
+            const prayerGridEl = document.getElementById('prayerGrid');
+            if (prayerGridEl) {
+                prayerGridEl.innerHTML = `
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <div>Fetching prayer times...</div>
+                    </div>
+                `;
+            }
             
-            console.log('🎉 App initialized successfully!');
+            // Set temporary Hijri date
+            this.setHijriDate('Loading...');
+        },
+        
+        showErrorState: function(message) {
+            const prayerGridEl = document.getElementById('prayerGrid');
+            if (prayerGridEl) {
+                prayerGridEl.innerHTML = `
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>${message}</div>
+                        <button class="retry-button" onclick="SalahTimes.loadPrayerTimesFromAPI()">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                `;
+            }
+        },
+        
+        async loadPrayerTimesFromAPI() {
+            console.log('📡 Fetching prayer times from API...');
+            
+            try {
+                const prayerData = await this.fetchPrayerTimes();
+                
+                // Update prayer times
+                this.currentPrayerTimes = {
+                    Fajr: this.formatTimeForDisplay(prayerData.timings.Fajr),
+                    Sunrise: this.formatTimeForDisplay(prayerData.timings.Sunrise),
+                    Dhuhr: this.formatTimeForDisplay(prayerData.timings.Dhuhr),
+                    Asr: this.formatTimeForDisplay(prayerData.timings.Asr),
+                    Maghrib: this.formatTimeForDisplay(prayerData.timings.Maghrib),
+                    Isha: this.formatTimeForDisplay(prayerData.timings.Isha)
+                };
+                
+                // Update Hijri date
+                const hijri = prayerData.date.hijri;
+                this.setHijriDate(`${hijri.day} ${hijri.month.en} ${hijri.year} AH`);
+                
+                // Render prayer times
+                this.renderPrayerTimes();
+                
+                console.log('✅ Prayer times loaded successfully:', this.currentPrayerTimes);
+                
+            } catch (error) {
+                console.error('❌ API Error:', error);
+                this.useFallbackData();
+                this.showErrorState(`Using approximate times. ${error.message}`);
+            }
+        },
+        
+        async fetchPrayerTimes() {
+            const today = new Date();
+            const dateString = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+            
+            // Try multiple API endpoints
+            const apiEndpoints = [
+                // Primary endpoint
+                `https://api.aladhan.com/v1/timings/${dateString}?latitude=${this.config.JUBAIL_LAT}&longitude=${this.config.JUBAIL_LNG}&method=${this.config.API_METHOD}`,
+                // With CORS proxy
+                `https://corsproxy.io/?${encodeURIComponent(`https://api.aladhan.com/v1/timings/${dateString}?latitude=${this.config.JUBAIL_LAT}&longitude=${this.config.JUBAIL_LNG}&method=${this.config.API_METHOD}`)}`,
+                // Alternative CORS proxy
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.aladhan.com/v1/timings/${dateString}?latitude=${this.config.JUBAIL_LAT}&longitude=${this.config.JUBAIL_LNG}&method=${this.config.API_METHOD}`)}`
+            ];
+            
+            for (const endpoint of apiEndpoints) {
+                try {
+                    console.log(`Trying endpoint: ${endpoint}`);
+                    const response = await fetch(endpoint, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                        },
+                        mode: 'cors'
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.code === 200) {
+                        console.log('✅ API call successful');
+                        return data.data;
+                    } else {
+                        throw new Error(`API error: ${data.data}`);
+                    }
+                    
+                } catch (error) {
+                    console.warn(`Endpoint failed:`, error);
+                    // Continue to next endpoint
+                }
+            }
+            
+            throw new Error('All API endpoints failed');
+        },
+        
+        formatTimeForDisplay: function(time24h) {
+            // Convert 24h format (e.g., "04:15") to 12h format (e.g., "4:15 AM")
+            const [hours, minutes] = time24h.split(':');
+            const hour = parseInt(hours);
+            const minute = parseInt(minutes);
+            
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const displayHour = hour % 12 || 12;
+            
+            return `${displayHour}:${minute.toString().padStart(2, '0')} ${ampm}`;
+        },
+        
+        useFallbackData: function() {
+            console.log('🔄 Using fallback prayer times');
+            this.currentPrayerTimes = {...this.defaultPrayerTimes};
+            this.setHijriDate('7 Jumada al-Thani 1445 AH');
+            this.renderPrayerTimes();
         },
         
         updateDateInfo: function(date) {
@@ -88,17 +239,16 @@
             
             // Create animations
             this.createAnimations();
+            
+            // Update countdown immediately
+            this.updateCountdown();
         },
         
         getPrayerTimes: function() {
-            return {
-                Fajr: "04:15 AM",
-                Sunrise: "05:35 AM", 
-                Dhuhr: "11:55 AM",
-                Asr: "03:25 PM",
-                Maghrib: "06:15 PM",
-                Isha: "07:45 PM"
-            };
+            // Return current prayer times or fallback
+            return Object.keys(this.currentPrayerTimes).length > 0 
+                ? this.currentPrayerTimes 
+                : this.defaultPrayerTimes;
         },
         
         createAnimations: function() {
@@ -216,6 +366,22 @@
             // Countdown updates
             this.updateCountdown();
             setInterval(() => this.updateCountdown(), 1000);
+            
+            // Update prayer times at midnight
+            this.scheduleMidnightUpdate();
+        },
+        
+        scheduleMidnightUpdate: function() {
+            const now = new Date();
+            const midnight = new Date(now);
+            midnight.setHours(24, 0, 0, 0);
+            const timeToMidnight = midnight - now;
+            
+            setTimeout(() => {
+                this.loadPrayerTimesFromAPI();
+                // Set daily update
+                setInterval(() => this.loadPrayerTimesFromAPI(), 24 * 60 * 60 * 1000);
+            }, timeToMidnight);
         }
     };
     
