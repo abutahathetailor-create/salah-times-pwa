@@ -154,6 +154,8 @@ body {
     flex-direction: column;
     justify-content: center;
     min-height: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 .prayer-card:hover {
@@ -189,14 +191,6 @@ body {
     font-weight: 700;
     color: #b0e6ff;
     flex-shrink: 0;
-}
-
-.prayer-card.active .prayer-time {
-    color: #4CAF50;
-}
-
-.prayer-card.next .prayer-time {
-    color: #FF9800;
 }
 
 .footer {
@@ -261,7 +255,6 @@ html, body {
     height: 100dvh;
 }
 
-/* Mobile-specific optimizations */
 @media (max-width: 400px) {
     .header h1 {
         font-size: 1.6rem;
