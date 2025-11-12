@@ -1,4 +1,4 @@
-const CACHE_NAME = 'salah-times-v1.3';
+const CACHE_NAME = 'salah-times-v1.4';
 const urlsToCache = [
   './',
   './index.html',
@@ -17,46 +17,16 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  // Handle relative paths for GitHub Pages
-  let requestUrl = event.request.url;
-  let baseUrl = self.location.origin + self.location.pathname.replace(/\/[^\/]*$/, '');
-  
-  // If it's a relative path request, reconstruct the full URL
-  if (requestUrl.startsWith(baseUrl + '/salah-times-pwa/')) {
-    // This is a GitHub Pages deployment
-    const relativePath = requestUrl.replace(baseUrl, '');
-    event.respondWith(
-      caches.match('./' + relativePath.split('/').pop())
-        .then(function(response) {
-          return response || fetch(event.request);
-        })
-    );
-  } else {
-    // Normal caching logic
-    event.respondWith(
-      caches.match(event.request)
-        .then(function(response) {
-          if (response) {
-            return response;
-          }
-          
-          return fetch(event.request).then(function(response) {
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            
-            var responseToCache = response.clone();
-            
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-              
-            return response;
-          });
-        })
-    );
-  }
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
+    )
+  );
 });
 
 self.addEventListener('activate', function(event) {
