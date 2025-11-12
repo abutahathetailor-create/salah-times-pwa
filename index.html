@@ -12,7 +12,7 @@
     
     <!-- Base Styles -->
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js"></script>
+    
     <!-- Prayer-specific Styles -->
     <link rel="stylesheet" href="css/fajr.css">
     <link rel="stylesheet" href="css/sunrise.css">
@@ -23,7 +23,6 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Salah Times - Jubail</title>
-    
 </head>
 <body>
     <div class="container">
@@ -63,127 +62,7 @@
         </div>
     </div>
 
-    <!-- Add inline JavaScript as fallback -->
-    <script>
-        // Simple fallback to show prayer times immediately
-        const prayerTimes = {
-            Fajr: "04:15",
-            Sunrise: "05:35", 
-            Dhuhr: "11:55",
-            Asr: "15:25",
-            Maghrib: "18:15",
-            Isha: "19:45"
-        };
-
-        function displayPrayerTimes() {
-            const prayerGrid = document.getElementById('prayerGrid');
-            const prayerIcons = {
-                Fajr: "fas fa-sun",
-                Sunrise: "fas fa-sunrise",
-                Dhuhr: "fas fa-sun",
-                Asr: "fas fa-sun",
-                Maghrib: "fas fa-sunset",
-                Isha: "fas fa-moon"
-            };
-            
-            prayerGrid.innerHTML = '';
-            
-            Object.entries(prayerTimes).forEach(([prayer, time]) => {
-                const prayerCard = document.createElement('div');
-                prayerCard.className = 'prayer-card';
-                prayerCard.id = `prayer-${prayer}`;
-                prayerCard.setAttribute('data-prayer', prayer);
-                
-                prayerCard.innerHTML = `
-                    <div class="prayer-name">
-                        <i class="${prayerIcons[prayer]}"></i>
-                        <span>${prayer}</span>
-                    </div>
-                    <div class="prayer-time">${formatTime(time)}</div>
-                `;
-                
-                prayerGrid.appendChild(prayerCard);
-            });
-            
-            // Add Fajr animations
-            createFajrAnimations();
-        }
-
-        function formatTime(timeString) {
-            const [hours, minutes] = timeString.split(':');
-            const hour = parseInt(hours);
-            const ampm = hour >= 12 ? 'PM' : 'AM';
-            const formattedHour = hour % 12 || 12;
-            return `${formattedHour}:${minutes} ${ampm}`;
-        }
-
-        function createFajrAnimations() {
-            const fajrCard = document.querySelector('.prayer-card[data-prayer="Fajr"]');
-            if (fajrCard) {
-                // Create birds container
-                const birdsContainer = document.createElement('div');
-                birdsContainer.className = 'birds-container';
-                
-                // Create 5 birds
-                for (let i = 0; i < 5; i++) {
-                    const bird = document.createElement('div');
-                    bird.className = 'bird';
-                    birdsContainer.appendChild(bird);
-                }
-                
-                // Create stars container
-                const starsContainer = document.createElement('div');
-                starsContainer.className = 'stars';
-                
-                // Create 5 stars
-                for (let i = 0; i < 5; i++) {
-                    const star = document.createElement('div');
-                    star.className = 'star';
-                    starsContainer.appendChild(star);
-                }
-                
-                fajrCard.appendChild(birdsContainer);
-                fajrCard.appendChild(starsContainer);
-            }
-        }
-
-        function updateCurrentTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit',
-                hour12: true 
-            });
-            document.getElementById('currentTime').textContent = timeString;
-            
-            // Update date
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCurrentTime();
-            setInterval(updateCurrentTime, 1000);
-            displayPrayerTimes();
-            
-            // Set Hijri date
-            document.getElementById('hijriDate').textContent = '7 Jumada al-Thani 1445 AH';
-            
-            // Set countdown
-            document.getElementById('countdownTitle').textContent = 'Time until Dhuhr:';
-            document.getElementById('countdownTimer').textContent = '01:23:45';
-        });
-    </script>
-
-    <!-- Try to load external JS -->
-    <script src="js/app.js" onerror="console.log('External JS failed to load')"></script>
+    <!-- SINGLE SCRIPT FILE -->
+    <script src="js/app.js"></script>
 </body>
 </html>
-
