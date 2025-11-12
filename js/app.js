@@ -1,17 +1,3 @@
-// Register Service Worker with GitHub Pages compatibility
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        // Use relative path for GitHub Pages
-        navigator.serviceWorker.register('./sw.js')
-            .then(function(registration) {
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            })
-            .catch(function(error) {
-                console.log('ServiceWorker registration failed: ', error);
-            });
-    });
-}
-
 // Jubail coordinates
 const JUBAIL_LAT = 27.0040;
 const JUBAIL_LNG = 49.6460;
@@ -31,6 +17,19 @@ let activePrayer = '';
 let nextPrayer = '';
 let apiAttempts = 0;
 const MAX_API_ATTEMPTS = 2;
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./sw.js')
+            .then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch(function(error) {
+                console.log('ServiceWorker registration failed: ', error);
+            });
+    });
+}
 
 // Update current time
 function updateCurrentTime() {
@@ -195,59 +194,35 @@ function getFallbackPrayerTimes() {
     };
 }
 
-// Initialize prayer times
-async function initPrayerTimes() {
-    try {
-        apiAttempts++;
-        hideError();
+// Create prayer-specific elements
+function createPrayerSpecificElements() {
+    // Add Fajr-specific elements (birds and stars)
+    const fajrCard = document.querySelector('.prayer-card[data-prayer="Fajr"]');
+    if (fajrCard) {
+        // Create birds container
+        const birdsContainer = document.createElement('div');
+        birdsContainer.className = 'birds-container';
         
-        let prayerData;
-        if (apiAttempts <= MAX_API_ATTEMPTS) {
-            prayerData = await fetchPrayerTimes();
-        } else {
-            throw new Error('Using fallback data after multiple attempts');
+        // Create 5 birds
+        for (let i = 0; i < 5; i++) {
+            const bird = document.createElement('div');
+            bird.className = 'bird';
+            birdsContainer.appendChild(bird);
         }
         
-        // Update Hijri date
-        const hijri = prayerData.date.hijri;
-        hijriDateEl.textContent = `${hijri.day} ${hijri.month.en} ${hijri.year} AH`;
+        // Create stars container
+        const starsContainer = document.createElement('div');
+        starsContainer.className = 'stars';
         
-        // Extract prayer times
-        prayerTimes = {
-            Fajr: prayerData.timings.Fajr,
-            Sunrise: prayerData.timings.Sunrise,
-            Dhuhr: prayerData.timings.Dhuhr,
-            Asr: prayerData.timings.Asr,
-            Maghrib: prayerData.timings.Maghrib,
-            Isha: prayerData.timings.Isha
-        };
+        // Create 5 stars
+        for (let i = 0; i < 5; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            starsContainer.appendChild(star);
+        }
         
-        // Display prayer times
-        displayPrayerTimes();
-        
-        // Start countdown
-        updateCountdown();
-        
-    } catch (error) {
-        console.error('Error loading prayer times:', error);
-        
-        // Use fallback data
-        const fallbackData = getFallbackPrayerTimes();
-        prayerTimes = {
-            Fajr: fallbackData.timings.Fajr,
-            Sunrise: fallbackData.timings.Sunrise,
-            Dhuhr: fallbackData.timings.Dhuhr,
-            Asr: fallbackData.timings.Asr,
-            Maghrib: fallbackData.timings.Maghrib,
-            Isha: fallbackData.timings.Isha
-        };
-        
-        hijriDateEl.textContent = `${fallbackData.date.hijri.day} ${fallbackData.date.hijri.month.en} ${fallbackData.date.hijri.year} AH`;
-        
-        displayPrayerTimes();
-        updateCountdown();
-        
-        showError(`Using approximate prayer times. ${error.message}`);
+        fajrCard.appendChild(birdsContainer);
+        fajrCard.appendChild(starsContainer);
     }
 }
 
@@ -268,6 +243,7 @@ function displayPrayerTimes() {
         const prayerCard = document.createElement('div');
         prayerCard.className = 'prayer-card';
         prayerCard.id = `prayer-${prayer}`;
+        prayerCard.setAttribute('data-prayer', prayer);
         
         prayerCard.innerHTML = `
             <div class="prayer-name">
@@ -279,6 +255,9 @@ function displayPrayerTimes() {
         
         prayerGridEl.appendChild(prayerCard);
     });
+    
+    // Create prayer-specific elements after cards are rendered
+    createPrayerSpecificElements();
 }
 
 // Format time to 12-hour format
@@ -348,6 +327,62 @@ function updateCountdown() {
     // Update active and next prayer variables
     activePrayer = activePrayerName;
     nextPrayer = nextPrayerName;
+}
+
+// Initialize prayer times
+async function initPrayerTimes() {
+    try {
+        apiAttempts++;
+        hideError();
+        
+        let prayerData;
+        if (apiAttempts <= MAX_API_ATTEMPTS) {
+            prayerData = await fetchPrayerTimes();
+        } else {
+            throw new Error('Using fallback data after multiple attempts');
+        }
+        
+        // Update Hijri date
+        const hijri = prayerData.date.hijri;
+        hijriDateEl.textContent = `${hijri.day} ${hijri.month.en} ${hijri.year} AH`;
+        
+        // Extract prayer times
+        prayerTimes = {
+            Fajr: prayerData.timings.Fajr,
+            Sunrise: prayerData.timings.Sunrise,
+            Dhuhr: prayerData.timings.Dhuhr,
+            Asr: prayerData.timings.Asr,
+            Maghrib: prayerData.timings.Maghrib,
+            Isha: prayerData.timings.Isha
+        };
+        
+        // Display prayer times
+        displayPrayerTimes();
+        
+        // Start countdown
+        updateCountdown();
+        
+    } catch (error) {
+        console.error('Error loading prayer times:', error);
+        
+        // Use fallback data
+        const fallbackData = getFallbackPrayerTimes();
+        prayerTimes = {
+            Fajr: fallbackData.timings.Fajr,
+            Sunrise: fallbackData.timings.Sunrise,
+            Dhuhr: fallbackData.timings.Dhuhr,
+            Asr: fallbackData.timings.Asr,
+            Maghrib: fallbackData.timings.Maghrib,
+            Isha: fallbackData.timings.Isha
+        };
+        
+        hijriDateEl.textContent = `${fallbackData.date.hijri.day} ${fallbackData.date.hijri.month.en} ${fallbackData.date.hijri.year} AH`;
+        
+        displayPrayerTimes();
+        updateCountdown();
+        
+        showError(`Using approximate prayer times. ${error.message}`);
+    }
 }
 
 // Initialize the app
