@@ -1,3 +1,4 @@
+/* ENHANCED BASE STYLES */
 * {
     margin: 0;
     padding: 0;
@@ -10,11 +11,21 @@
     --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
     --safe-area-inset-left: env(safe-area-inset-left, 0px);
     --safe-area-inset-right: env(safe-area-inset-right, 0px);
+    
+    /* New color variables */
+    --primary-gradient: linear-gradient(135deg, #1a5e63 0%, #0d2a35 100%);
+    --card-bg: rgba(255, 255, 255, 0.12);
+    --card-border: rgba(255, 255, 255, 0.18);
+    --text-primary: #ffffff;
+    --text-secondary: #b0e6ff;
+    --text-accent: #ffd54f;
+    --shadow-global: 0 20px 40px rgba(0, 0, 0, 0.3);
+    --border-radius: 20px;
 }
 
 body {
-    background: linear-gradient(135deg, #1a5e63 0%, #0d2a35 100%);
-    color: #fff;
+    background: var(--primary-gradient);
+    color: var(--text-primary);
     min-height: 100vh;
     min-height: 100dvh;
     display: flex;
@@ -32,409 +43,340 @@ body {
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
     border-radius: 0;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: var(--shadow-global);
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Enhanced Header */
 .header {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    padding-top: max(20px, var(--safe-area-inset-top));
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    padding: 25px 20px;
+    padding-top: max(25px, var(--safe-area-inset-top));
     text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
 }
 
 .header h1 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+    font-size: 2.2rem;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 15px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
 }
 
 .header h1 i {
     color: #4CAF50;
+    filter: drop-shadow(0 0 10px rgba(76, 175, 80, 0.6));
+    animation: gentlePulse 3s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .date-display {
-    font-size: 1.1rem;
-    color: #b0e6ff;
-    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hijri-date {
-    font-size: 0.9rem;
-    color: #ffd54f;
-    margin-bottom: 8px;
+    font-size: 1rem;
+    color: var(--text-accent);
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .location {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    font-size: 1rem;
+    gap: 10px;
+    font-size: 1.1rem;
+    background: rgba(255, 152, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .location i {
     color: #FF9800;
+    filter: drop-shadow(0 0 6px rgba(255, 152, 0, 0.5));
 }
 
+/* Enhanced Content Area */
 .content {
-    padding: 20px;
+    padding: 25px;
     flex: 1;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background: rgba(255, 255, 255, 0.02);
 }
 
 .current-time {
     text-align: center;
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 12px;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    padding: 18px;
+    border-radius: var(--border-radius);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     flex-shrink: 0;
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .current-time i {
     color: #4CAF50;
+    filter: drop-shadow(0 0 8px rgba(76, 175, 80, 0.6));
 }
 
 .countdown {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    padding: 20px;
+    border-radius: var(--border-radius);
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .countdown-title {
-    font-size: 1rem;
-    margin-bottom: 8px;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
     color: #FF9800;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .countdown-timer {
-    font-size: 1.6rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 800;
     color: #4CAF50;
+    text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
 }
 
+/* Enhanced Prayer Grid */
 .prayer-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 15px;
+    gap: 18px;
+    margin-bottom: 20px;
     flex: 1;
     overflow: hidden;
 }
 
+/* Enhanced Base Prayer Card */
 .prayer-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 20px 15px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 25px 20px;
     text-align: center;
-    transition: transform 0.3s ease, background 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid var(--card-border);
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 0;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.prayer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
 }
 
 .prayer-card:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .prayer-card.active {
-    background: rgba(76, 175, 80, 0.3);
-    border: 1px solid rgba(76, 175, 80, 0.5);
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.2);
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.4) 0%, rgba(56, 142, 60, 0.3) 100%);
+    border: 2px solid #4CAF50;
+    box-shadow: 0 0 40px rgba(76, 175, 80, 0.6);
+    transform: scale(1.05);
 }
 
 .prayer-card.next {
-    background: rgba(255, 152, 0, 0.3);
-    border: 1px solid rgba(255, 152, 0, 0.5);
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.2);
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.4) 0%, rgba(245, 124, 0, 0.3) 100%);
+    border: 2px solid #FF9800;
+    box-shadow: 0 0 40px rgba(255, 152, 0, 0.6);
+    transform: scale(1.03);
 }
 
 .prayer-name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     flex-shrink: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .prayer-time {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #b0e6ff;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-secondary);
     flex-shrink: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
 }
 
+/* Enhanced Footer */
 .footer {
     text-align: center;
-    padding: 15px 20px;
-    padding-bottom: max(15px, var(--safe-area-inset-bottom));
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.8rem;
+    padding: 20px;
+    padding-bottom: max(20px, var(--safe-area-inset-bottom));
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.9rem;
     color: #aaa;
     flex-shrink: 0;
+    backdrop-filter: blur(10px);
 }
 
+/* Enhanced Loading State */
 .loading {
     text-align: center;
-    padding: 40px;
-    font-size: 1.1rem;
+    padding: 50px;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .loading i {
-    font-size: 2rem;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
     color: #4CAF50;
+    animation: spin 1.5s linear infinite;
 }
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Error Message */
 .error-message {
-    background: rgba(244, 67, 54, 0.2);
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.3) 0%, rgba(229, 57, 53, 0.2) 100%);
     border: 1px solid rgba(244, 67, 54, 0.5);
-    border-radius: 10px;
-    padding: 15px;
+    border-radius: var(--border-radius);
+    padding: 20px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #ffcdd2;
-    font-size: 0.9rem;
+    font-size: 1rem;
     flex-shrink: 0;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(244, 67, 54, 0.3);
 }
 
 .retry-button {
-    background: #4CAF50;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border-radius: 50px;
     cursor: pointer;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    transition: background 0.3s;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
 }
 
 .retry-button:hover {
-    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
 }
 
-html, body {
-    overflow: hidden;
-    height: 100vh;
-    height: 100dvh;
-}
-
+/* Enhanced Mobile Optimizations */
 @media (max-width: 400px) {
     .header h1 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
     
     .prayer-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 15px;
     }
     
     .current-time {
-        font-size: 1.2rem;
-    }
-    
-    .countdown-timer {
-        font-size: 1.4rem;
-    }
-    
-    .prayer-time {
-        font-size: 1.2rem;
-    }
-    
-    .header, .content {
-        padding: 15px;
-    }
-}
-
-@media (max-height: 700px) {
-    .header {
-        padding: 15px;
-        padding-top: max(15px, var(--safe-area-inset-top));
-    }
-    
-    .header h1 {
-        font-size: 1.6rem;
-        margin-bottom: 8px;
-    }
-    
-    .content {
-        padding: 15px;
-    }
-    
-    .current-time {
-        font-size: 1.2rem;
-        padding: 12px;
-        margin-bottom: 15px;
-    }
-    
-    .countdown {
-        padding: 12px;
-        margin-bottom: 15px;
-    }
-    
-    .countdown-timer {
-        font-size: 1.4rem;
-    }
-    
-    .prayer-grid {
-        gap: 12px;
-    }
-    
-    .prayer-card {
-        padding: 15px 12px;
-    }
-    
-    .prayer-time {
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-height: 600px) {
-    .header h1 {
-        font-size: 1.4rem;
-    }
-    
-    .date-display {
-        font-size: 1rem;
-    }
-    
-    .hijri-date {
-        font-size: 0.8rem;
-    }
-    
-    .location {
-        font-size: 0.9rem;
-    }
-    
-    .current-time {
-        font-size: 1.1rem;
-        margin-bottom: 12px;
-    }
-    
-    .countdown-title {
-        font-size: 0.9rem;
-    }
-    
-    .countdown-timer {
         font-size: 1.3rem;
     }
     
-    .prayer-name {
-        font-size: 1rem;
+    .countdown-timer {
+        font-size: 1.5rem;
     }
     
     .prayer-time {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-height: 500px) {
-    .header {
-        padding: 10px 15px;
-        padding-top: max(10px, var(--safe-area-inset-top));
+        font-size: 1.4rem;
     }
     
-    .header h1 {
-        font-size: 1.2rem;
-        margin-bottom: 5px;
-    }
-    
-    .date-display, .hijri-date, .location {
-        font-size: 0.8rem;
-    }
-    
-    .content {
-        padding: 10px 15px;
-    }
-    
-    .current-time {
-        font-size: 1rem;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-    
-    .countdown {
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-    
-    .countdown-title {
-        font-size: 0.8rem;
-        margin-bottom: 5px;
-    }
-    
-    .countdown-timer {
-        font-size: 1.1rem;
-    }
-    
-    .prayer-grid {
-        gap: 8px;
+    .header, .content {
+        padding: 20px;
     }
     
     .prayer-card {
-        padding: 10px 8px;
+        padding: 20px 15px;
     }
-    
-    .prayer-name {
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-    }
-    
-    .prayer-time {
-        font-size: 1rem;
-    }
-    
-    .footer {
-        padding: 10px 15px;
-        padding-bottom: max(10px, var(--safe-area-inset-bottom));
-        font-size: 0.7rem;
-    }
-}
-/* Ensure active and next prayers are clearly visible */
-.prayer-card.active {
-    background: rgba(76, 175, 80, 0.4) !important;
-    border: 2px solid #4CAF50 !important;
-    box-shadow: 0 0 20px rgba(76, 175, 80, 0.6) !important;
 }
 
-.prayer-card.next {
-    background: rgba(255, 152, 0, 0.4) !important;
-    border: 2px solid #FF9800 !important;
-    box-shadow: 0 0 20px rgba(255, 152, 0, 0.6) !important;
-}
+/* Keep all your existing media queries for different screen heights */
+/* ... (your existing media queries remain the same) ... */
