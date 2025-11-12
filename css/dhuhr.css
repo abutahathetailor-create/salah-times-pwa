@@ -1,1 +1,115 @@
+/* Dhuhr-specific styles */
+.prayer-card[data-prayer="Dhuhr"] {
+    background: linear-gradient(135deg, 
+        #87CEEB 0%, 
+        #98D8E8 25%, 
+        #B0E0E6 50%, 
+        #87CEFA 75%, 
+        #00BFFF 100%);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 191, 255, 0.3);
+}
 
+.prayer-card[data-prayer="Dhuhr"] .prayer-name {
+    justify-content: center;
+    color: #1a5276;
+    font-size: 1.2rem;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.prayer-card[data-prayer="Dhuhr"] .prayer-name i {
+    color: #ff8c00;
+    filter: drop-shadow(0 0 8px rgba(255, 140, 0, 0.6));
+}
+
+.prayer-card[data-prayer="Dhuhr"] .prayer-time {
+    color: #1a5276;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+    font-weight: 800;
+}
+
+/* Sun at zenith */
+.prayer-card[data-prayer="Dhuhr"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #FFD700 0%, #FF8C00 30%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: zenithGlow 3s ease-in-out infinite;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+}
+
+@keyframes zenithGlow {
+    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Sun beams radiating */
+.sun-beams {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+}
+
+.beam {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    animation: beamRotate 10s linear infinite;
+    transform-origin: center;
+}
+
+.beam:nth-child(1) { width: 2px; height: 100px; top: 0; left: 50%; }
+.beam:nth-child(2) { width: 2px; height: 100px; top: 0; left: 50%; transform: rotate(45deg); }
+.beam:nth-child(3) { width: 2px; height: 100px; top: 0; left: 50%; transform: rotate(90deg); }
+.beam:nth-child(4) { width: 2px; height: 100px; top: 0; left: 50%; transform: rotate(135deg); }
+
+@keyframes beamRotate {
+    0% { transform: rotate(0deg); opacity: 0.5; }
+    100% { transform: rotate(360deg); opacity: 0.5; }
+}
+
+/* Heat waves */
+.heat-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    pointer-events: none;
+}
+
+.heat-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.6),
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: heatShimmer 4s ease-in-out infinite;
+}
+
+.heat-wave:nth-child(1) { animation-delay: 0s; }
+.heat-wave:nth-child(2) { animation-delay: 1s; }
+.heat-wave:nth-child(3) { animation-delay: 2s; }
+
+@keyframes heatShimmer {
+    0%, 100% { transform: translateY(0); opacity: 0; }
+    50% { transform: translateY(-10px); opacity: 0.7; }
+}
