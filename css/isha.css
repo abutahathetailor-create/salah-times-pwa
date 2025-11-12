@@ -1,1 +1,209 @@
+/* Isha-specific styles */
+.prayer-card[data-prayer="Isha"] {
+    background: linear-gradient(135deg, 
+        #0c1445 0%,     /* Deep blue */
+        #1a237e 20%,    /* Dark blue */
+        #283593 40%,    /* Medium blue */
+        #3949ab 60%,    /* Royal blue */
+        #5c6bc0 80%,    /* Light blue */
+        #9fa8da 100%    /* Lavender */
+    );
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: right;
+    padding-right: 20px;
+    box-shadow: 0 8px 32px rgba(25, 25, 112, 0.5);
+}
 
+.prayer-card[data-prayer="Isha"] .prayer-name {
+    justify-content: flex-end;
+    color: #e3f2fd;
+    font-size: 1.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.prayer-card[data-prayer="Isha"] .prayer-name i {
+    color: #ffeb3b;
+    filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.8));
+}
+
+.prayer-card[data-prayer="Isha"] .prayer-time {
+    color: #ffeb3b;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    font-weight: 800;
+}
+
+/* Moon with craters */
+.moon {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, 
+        #f5f5f5 0%,
+        #e0e0e0 20%,
+        #bdbdbd 40%,
+        #9e9e9e 100%
+    );
+    border-radius: 50%;
+    transform: translateY(-50%);
+    animation: moonGlow 6s ease-in-out infinite;
+    box-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.8),
+        inset -10px -5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.moon::before, .moon::after {
+    content: '';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+}
+
+.moon::before {
+    top: 15px;
+    left: 10px;
+    width: 8px;
+    height: 8px;
+}
+
+.moon::after {
+    top: 30px;
+    left: 25px;
+    width: 5px;
+    height: 5px;
+}
+
+@keyframes moonGlow {
+    0%, 100% { 
+        box-shadow: 
+            0 0 30px rgba(255, 255, 255, 0.8),
+            inset -10px -5px 10px rgba(0, 0, 0, 0.3);
+    }
+    50% { 
+        box-shadow: 
+            0 0 50px rgba(255, 255, 255, 1),
+            inset -10px -5px 10px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Stars for night sky */
+.night-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.night-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: nightTwinkle 4s ease-in-out infinite;
+}
+
+.night-star:nth-child(1) { top: 15%; left: 15%; width: 2px; height: 2px; animation-delay: 0s; }
+.night-star:nth-child(2) { top: 25%; left: 60%; width: 1.5px; height: 1.5px; animation-delay: 1s; }
+.night-star:nth-child(3) { top: 40%; left: 35%; width: 1px; height: 1px; animation-delay: 2s; }
+.night-star:nth-child(4) { top: 55%; left: 75%; width: 2px; height: 2px; animation-delay: 3s; }
+.night-star:nth-child(5) { top: 65%; left: 25%; width: 1.2px; height: 1.2px; animation-delay: 4s; }
+.night-star:nth-child(6) { top: 75%; left: 50%; width: 1.5px; height: 1.5px; animation-delay: 5s; }
+.night-star:nth-child(7) { top: 85%; left: 65%; width: 1px; height: 1px; animation-delay: 6s; }
+.night-star:nth-child(8) { top: 35%; left: 85%; width: 2px; height: 2px; animation-delay: 7s; }
+
+@keyframes nightTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Shooting stars */
+.shooting-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.shooting-star {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, white, transparent);
+    animation: shootStar 15s linear infinite;
+    opacity: 0;
+}
+
+.shooting-star:nth-child(1) {
+    top: 20%; left: -50px;
+    width: 60px; height: 1px;
+    animation-delay: 0s;
+    transform: rotate(-30deg);
+}
+
+.shooting-star:nth-child(2) {
+    top: 40%; left: -80px;
+    width: 80px; height: 1px;
+    animation-delay: 8s;
+    transform: rotate(-45deg);
+}
+
+.shooting-star:nth-child(3) {
+    top: 60%; left: -100px;
+    width: 100px; height: 1px;
+    animation-delay: 16s;
+    transform: rotate(-60deg);
+}
+
+@keyframes shootStar {
+    0% { transform: translateX(0) translateY(0) rotate(-30deg); opacity: 0; }
+    10% { opacity: 1; }
+    20% { opacity: 0; }
+    100% { transform: translateX(500px) translateY(150px) rotate(-30deg); opacity: 0; }
+}
+
+/* Constellation dots */
+.constellations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.constellation {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: constellationPulse 10s ease-in-out infinite;
+}
+
+.constellation:nth-child(1) { top: 30%; left: 40%; width: 2px; height: 2px; animation-delay: 0s; }
+.constellation:nth-child(2) { top: 35%; left: 45%; width: 1.5px; height: 1.5px; animation-delay: 2s; }
+.constellation:nth-child(3) { top: 40%; left: 50%; width: 2px; height: 2px; animation-delay: 4s; }
+.constellation:nth-child(4) { top: 45%; left: 55%; width: 1.5px; height: 1.5px; animation-delay: 6s; }
+
+@keyframes constellationPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+/* Mobile optimization */
+@media (max-width: 400px) {
+    .prayer-card[data-prayer="Maghrib"],
+    .prayer-card[data-prayer="Isha"] {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .moon {
+        width: 40px;
+        height: 40px;
+        left: 15px;
+    }
+}
