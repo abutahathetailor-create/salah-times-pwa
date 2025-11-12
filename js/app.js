@@ -149,4 +149,73 @@ function createPrayerSpecificElements() {
         asrCard.appendChild(shadowRays);
         asrCard.appendChild(goldenParticles);
     }
+    // Maghrib elements
+const maghribCard = document.querySelector('.prayer-card[data-prayer="Maghrib"]');
+if (maghribCard) {
+    // Horizon line
+    const horizon = document.createElement('div');
+    horizon.className = 'horizon';
+    
+    // Water reflection
+    const waterReflection = document.createElement('div');
+    waterReflection.className = 'water-reflection';
+    
+    // Twilight stars
+    const twilightStars = document.createElement('div');
+    twilightStars.className = 'twilight-stars';
+    for (let i = 0; i < 5; i++) {
+        const star = document.createElement('div');
+        star.className = 'twilight-star';
+        twilightStars.appendChild(star);
+    }
+    
+    // Silhouette
+    const silhouette = document.createElement('div');
+    silhouette.className = 'silhouette';
+    
+    maghribCard.appendChild(horizon);
+    maghribCard.appendChild(waterReflection);
+    maghribCard.appendChild(twilightStars);
+    maghribCard.appendChild(silhouette);
+}
+
+// Isha elements
+const ishaCard = document.querySelector('.prayer-card[data-prayer="Isha"]');
+if (ishaCard) {
+    // Moon
+    const moon = document.createElement('div');
+    moon.className = 'moon';
+    
+    // Night stars
+    const nightStars = document.createElement('div');
+    nightStars.className = 'night-stars';
+    for (let i = 0; i < 8; i++) {
+        const star = document.createElement('div');
+        star.className = 'night-star';
+        nightStars.appendChild(star);
+    }
+    
+    // Shooting stars
+    const shootingStars = document.createElement('div');
+    shootingStars.className = 'shooting-stars';
+    for (let i = 0; i < 3; i++) {
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+        shootingStars.appendChild(star);
+    }
+    
+    // Constellations
+    const constellations = document.createElement('div');
+    constellations.className = 'constellations';
+    for (let i = 0; i < 4; i++) {
+        const star = document.createElement('div');
+        star.className = 'constellation';
+        constellations.appendChild(star);
+    }
+    
+    ishaCard.appendChild(moon);
+    ishaCard.appendChild(nightStars);
+    ishaCard.appendChild(shootingStars);
+    ishaCard.appendChild(constellations);
+}
 }
