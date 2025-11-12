@@ -1,4 +1,4 @@
-const CACHE_NAME = 'salah-times-v3.1';
+const CACHE_NAME = 'salah-times-v4.0'; // Update version
 const urlsToCache = [
   './',
   './index.html',
@@ -49,3 +49,4 @@ self.addEventListener('fetch', function(event) {
             })
     );
 });
+
