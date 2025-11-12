@@ -1,32 +1,3 @@
-// Add this at the top of js/app.js
-if ('serviceWorker' in navigator) {
-    // Unregister all service workers
-    navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for(let registration of registrations) {
-            registration.unregister();
-            console.log('ServiceWorker unregistered');
-        }
-    });
-    
-    // Clear all caches
-    caches.keys().then(function(cacheNames) {
-        cacheNames.forEach(function(cacheName) {
-            caches.delete(cacheName);
-            console.log('Cache deleted:', cacheName);
-        });
-    });
-    
-    // Register new service worker
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('./sw.js')
-            .then(function(registration) {
-                console.log('ServiceWorker registered with scope: ', registration.scope);
-            })
-            .catch(function(error) {
-                console.log('ServiceWorker registration failed: ', error);
-            });
-    });
-}
 // Jubail coordinates
 const JUBAIL_LAT = 27.0040;
 const JUBAIL_LNG = 49.6460;
