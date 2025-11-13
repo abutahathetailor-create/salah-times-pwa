@@ -1,5 +1,4 @@
-
-/* Sunrise-specific styles */
+/* SUNRISE STYLES - FIXED SUN POSITION */
 .prayer-card[data-prayer="Sunrise"] {
     background: linear-gradient(135deg, 
         #ff6b35 0%, 
@@ -21,6 +20,8 @@
     color: #7c4700;
     font-size: 1.2rem;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    position: relative;
 }
 
 .prayer-card[data-prayer="Sunrise"] .prayer-name i {
@@ -33,107 +34,232 @@
     font-size: 1.6rem;
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
     font-weight: 800;
+    z-index: 10;
+    position: relative;
+}
+
+/* Fixed Sun Position - Circular Motion */
+.sunrise-sun {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, 
+        #FFD700 0%, 
+        #FF8C00 30%, 
+        #FF4500 60%, 
+        transparent 80%);
+    border-radius: 50%;
+    animation: sunriseOrbit 20s linear infinite;
+    box-shadow: 
+        0 0 40px rgba(255, 215, 0, 0.8),
+        0 0 80px rgba(255, 140, 0, 0.6),
+        0 0 120px rgba(255, 69, 0, 0.4);
+    filter: brightness(1.2);
+    z-index: 2;
+}
+
+/* Circular orbit animation - like a clock */
+@keyframes sunriseOrbit {
+    0% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(0deg) 
+            translateX(40px) 
+            rotate(0deg);
+        opacity: 0.8;
+    }
+    25% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(90deg) 
+            translateX(40px) 
+            rotate(-90deg);
+        opacity: 1;
+    }
+    50% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(180deg) 
+            translateX(40px) 
+            rotate(-180deg);
+        opacity: 0.9;
+    }
+    75% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(270deg) 
+            translateX(40px) 
+            rotate(-270deg);
+        opacity: 1;
+    }
+    100% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(360deg) 
+            translateX(40px) 
+            rotate(-360deg);
+        opacity: 0.8;
+    }
 }
 
 /* Sun rays animation */
-.sun-rays {
+.sunrise-rays {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 1;
 }
 
-.ray {
+.sunrise-ray {
     position: absolute;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-    animation: rayMove 8s linear infinite;
+    animation: sunriseRayMove 8s linear infinite;
+    opacity: 0.7;
 }
 
-.ray:nth-child(1) { top: 20%; left: -50%; width: 200%; height: 2px; animation-delay: 0s; }
-.ray:nth-child(2) { top: 40%; left: -50%; width: 200%; height: 1px; animation-delay: 2s; }
-.ray:nth-child(3) { top: 60%; left: -50%; width: 200%; height: 1.5px; animation-delay: 4s; }
-.ray:nth-child(4) { top: 80%; left: -50%; width: 200%; height: 1px; animation-delay: 6s; }
-
-@keyframes rayMove {
-    0% { transform: translateX(0); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translateX(100%); opacity: 0; }
+.sunrise-ray:nth-child(1) { 
+    top: 20%; 
+    left: -50%; 
+    width: 200%; 
+    height: 2px; 
+    animation-delay: 0s; 
+}
+.sunrise-ray:nth-child(2) { 
+    top: 40%; 
+    left: -50%; 
+    width: 200%; 
+    height: 1px; 
+    animation-delay: 2s; 
+}
+.sunrise-ray:nth-child(3) { 
+    top: 60%; 
+    left: -50%; 
+    width: 200%; 
+    height: 1.5px; 
+    animation-delay: 4s; 
+}
+.sunrise-ray:nth-child(4) { 
+    top: 80%; 
+    left: -50%; 
+    width: 200%; 
+    height: 1px; 
+    animation-delay: 6s; 
 }
 
-/* Sun disc */
-.prayer-card[data-prayer="Sunrise"]::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -25px;
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, #ff6b35 0%, #ff8e53 50%, transparent 70%);
-    border-radius: 50%;
-    transform: translateY(-50%);
-    animation: sunPulse 4s ease-in-out infinite;
-    box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
-}
-
-@keyframes sunPulse {
-    0%, 100% { transform: translateY(-50%) scale(1); }
-    50% { transform: translateY(-50%) scale(1.1); }
+@keyframes sunriseRayMove {
+    0% { 
+        transform: translateX(0); 
+        opacity: 0; 
+    }
+    50% { 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
 }
 
 /* Cloud animation */
-.clouds {
+.sunrise-clouds {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.cloud {
+.sunrise-cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 50px;
-    animation: cloudFloat 20s linear infinite;
+    animation: sunriseCloudFloat 20s linear infinite;
     filter: blur(1px);
+    opacity: 0.8;
 }
 
-.cloud::before, .cloud::after {
+.sunrise-cloud::before, .sunrise-cloud::after {
     content: '';
     position: absolute;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
 }
 
-.cloud:nth-child(1) {
-    top: 20%; left: -50px;
-    width: 40px; height: 20px;
+.sunrise-cloud:nth-child(1) {
+    top: 20%; 
+    left: -50px;
+    width: 40px; 
+    height: 20px;
     animation-duration: 25s;
 }
-.cloud:nth-child(1)::before { top: -8px; left: 5px; width: 25px; height: 25px; }
-.cloud:nth-child(1)::after { top: -5px; right: 5px; width: 20px; height: 20px; }
+.sunrise-cloud:nth-child(1)::before { 
+    top: -8px; 
+    left: 5px; 
+    width: 25px; 
+    height: 25px; 
+}
+.sunrise-cloud:nth-child(1)::after { 
+    top: -5px; 
+    right: 5px; 
+    width: 20px; 
+    height: 20px; 
+}
 
-.cloud:nth-child(2) {
-    top: 60%; left: -80px;
-    width: 60px; height: 25px;
+.sunrise-cloud:nth-child(2) {
+    top: 60%; 
+    left: -80px;
+    width: 60px; 
+    height: 25px;
     animation-duration: 30s;
     animation-delay: 5s;
 }
-.cloud:nth-child(2)::before { top: -10px; left: 8px; width: 30px; height: 30px; }
-.cloud:nth-child(2)::after { top: -8px; right: 8px; width: 25px; height: 25px; }
+.sunrise-cloud:nth-child(2)::before { 
+    top: -10px; 
+    left: 8px; 
+    width: 30px; 
+    height: 30px; 
+}
+.sunrise-cloud:nth-child(2)::after { 
+    top: -8px; 
+    right: 8px; 
+    width: 25px; 
+    height: 25px; 
+}
 
-@keyframes cloudFloat {
-    0% { transform: translateX(-100px); opacity: 0; }
-    10% { opacity: 0.7; }
-    90% { opacity: 0.7; }
-    100% { transform: translateX(calc(100% + 100px)); opacity: 0; }
+@keyframes sunriseCloudFloat {
+    0% { 
+        transform: translateX(-100px); 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 0.8; 
+    }
+    90% { 
+        opacity: 0.8; 
+    }
+    100% { 
+        transform: translateX(calc(100% + 100px)); 
+        opacity: 0; 
+    }
 }
 
 /* Mobile optimization */
 @media (max-width: 400px) {
     .prayer-card[data-prayer="Sunrise"] {
         padding-left: 15px;
+    }
+    
+    .sunrise-sun {
+        width: 40px;
+        height: 40px;
+        right: 20px;
     }
 }
