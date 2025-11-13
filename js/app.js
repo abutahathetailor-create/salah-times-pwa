@@ -296,54 +296,102 @@ createAnimations: function() {
         }
     }
 
-    // Sunrise animations
-const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
-    if (sunriseCard) {
-        console.log('🌅 Creating Sunrise animations');
-        
-        // Create sun element
-        if (!sunriseCard.querySelector('.sunrise-sun')) {
-            const sunElement = document.createElement('div');
-            sunElement.className = 'sunrise-sun';
-            sunriseCard.appendChild(sunElement);
-        }
-        
-        // Create sun rays
-        if (!sunriseCard.querySelector('.sunrise-rays')) {
-            const sunRays = document.createElement('div');
-            sunRays.className = 'sunrise-rays';
-            for (let i = 0; i < 4; i++) {
-                const ray = document.createElement('div');
-                ray.className = 'sunrise-ray';
-                sunRays.appendChild(ray);
-            }
-            sunriseCard.appendChild(sunRays);
-        }
-         // Add rotating sun beams
-        if (!sunriseCard.querySelector('.sun-beams')) {
-            const sunBeams = document.createElement('div');
-            sunBeams.className = 'sun-beams';
-            for (let i = 0; i < 4; i++) {
-                const beam = document.createElement('div');
-                beam.className = 'sun-beam';
-                sunBeams.appendChild(beam);
-            }
-            sunriseCard.appendChild(sunBeams);
-        }
+        // Sunrise animations
+    const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
+        if (sunriseCard) {
+            console.log('🌅 Creating Sunrise animations');
             
-    // Create clouds
-    if (!sunriseCard.querySelector('.sunrise-clouds')) {
-        const clouds = document.createElement('div');
-        clouds.className = 'sunrise-clouds';
-        for (let i = 0; i < 2; i++) {
-            const cloud = document.createElement('div');
-            cloud.className = 'sunrise-cloud';
-            clouds.appendChild(cloud);
+            // Create sun element
+            if (!sunriseCard.querySelector('.sunrise-sun')) {
+                const sunElement = document.createElement('div');
+                sunElement.className = 'sunrise-sun';
+                sunriseCard.appendChild(sunElement);
+            }
+            
+            // Create sun rays
+            if (!sunriseCard.querySelector('.sunrise-rays')) {
+                const sunRays = document.createElement('div');
+                sunRays.className = 'sunrise-rays';
+                for (let i = 0; i < 4; i++) {
+                    const ray = document.createElement('div');
+                    ray.className = 'sunrise-ray';
+                    sunRays.appendChild(ray);
+                }
+                sunriseCard.appendChild(sunRays);
+            }
+             // Add rotating sun beams
+            if (!sunriseCard.querySelector('.sun-beams')) {
+                const sunBeams = document.createElement('div');
+                sunBeams.className = 'sun-beams';
+                for (let i = 0; i < 4; i++) {
+                    const beam = document.createElement('div');
+                    beam.className = 'sun-beam';
+                    sunBeams.appendChild(beam);
+                }
+                sunriseCard.appendChild(sunBeams);
+            }
+                
+        // Create clouds
+        if (!sunriseCard.querySelector('.sunrise-clouds')) {
+            const clouds = document.createElement('div');
+            clouds.className = 'sunrise-clouds';
+            for (let i = 0; i < 2; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'sunrise-cloud';
+                clouds.appendChild(cloud);
+            }
+            sunriseCard.appendChild(clouds);
         }
-        sunriseCard.appendChild(clouds);
     }
-}
     
+            // Dhuhr animations
+        const dhuhrCard = document.querySelector('.prayer-card[data-prayer="Dhuhr"]');
+        if (dhuhrCard) {
+            console.log('☀️ Creating Dhuhr animations');
+            
+            // Create sun element
+            if (!dhuhrCard.querySelector('.dhuhr-sun')) {
+                const sunElement = document.createElement('div');
+                sunElement.className = 'dhuhr-sun';
+                dhuhrCard.appendChild(sunElement);
+            }
+            
+            // Create sun beams
+            if (!dhuhrCard.querySelector('.dhuhr-beams')) {
+                const sunBeams = document.createElement('div');
+                sunBeams.className = 'dhuhr-beams';
+                for (let i = 0; i < 4; i++) {
+                    const beam = document.createElement('div');
+                    beam.className = 'dhuhr-beam';
+                    sunBeams.appendChild(beam);
+                }
+                dhuhrCard.appendChild(sunBeams);
+            }
+            
+            // Create heat waves
+            if (!dhuhrCard.querySelector('.dhuhr-heat-waves')) {
+                const heatWaves = document.createElement('div');
+                heatWaves.className = 'dhuhr-heat-waves';
+                for (let i = 0; i < 3; i++) {
+                    const wave = document.createElement('div');
+                    wave.className = 'dhuhr-heat-wave';
+                    heatWaves.appendChild(wave);
+                }
+                dhuhrCard.appendChild(heatWaves);
+            }
+            
+            // Create floating particles
+            if (!dhuhrCard.querySelector('.dhuhr-particles')) {
+                const particles = document.createElement('div');
+                particles.className = 'dhuhr-particles';
+                for (let i = 0; i < 5; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'dhuhr-particle';
+                    particles.appendChild(particle);
+                }
+                dhuhrCard.appendChild(particles);
+            }
+        }
     // Add other prayer animations here as we fix them
 },
         
