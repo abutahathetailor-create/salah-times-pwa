@@ -295,6 +295,43 @@ createAnimations: function() {
             fajrCard.appendChild(cloudsContainer);
         }
     }
+
+    // Sunrise animations
+const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
+if (sunriseCard) {
+    console.log('🌅 Creating Sunrise animations');
+    
+    // Create sun element
+    if (!sunriseCard.querySelector('.sunrise-sun')) {
+        const sunElement = document.createElement('div');
+        sunElement.className = 'sunrise-sun';
+        sunriseCard.appendChild(sunElement);
+    }
+    
+    // Create sun rays
+    if (!sunriseCard.querySelector('.sunrise-rays')) {
+        const sunRays = document.createElement('div');
+        sunRays.className = 'sunrise-rays';
+        for (let i = 0; i < 4; i++) {
+            const ray = document.createElement('div');
+            ray.className = 'sunrise-ray';
+            sunRays.appendChild(ray);
+        }
+        sunriseCard.appendChild(sunRays);
+    }
+    
+    // Create clouds
+    if (!sunriseCard.querySelector('.sunrise-clouds')) {
+        const clouds = document.createElement('div');
+        clouds.className = 'sunrise-clouds';
+        for (let i = 0; i < 2; i++) {
+            const cloud = document.createElement('div');
+            cloud.className = 'sunrise-cloud';
+            clouds.appendChild(cloud);
+        }
+        sunriseCard.appendChild(clouds);
+    }
+}
     
     // Add other prayer animations here as we fix them
 },
