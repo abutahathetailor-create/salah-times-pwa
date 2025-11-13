@@ -344,7 +344,7 @@ createAnimations: function() {
         }
     }
     
-            // Dhuhr animations
+        // Dhuhr animations
         const dhuhrCard = document.querySelector('.prayer-card[data-prayer="Dhuhr"]');
         if (dhuhrCard) {
             console.log('☀️ Creating Dhuhr animations');
@@ -356,7 +356,19 @@ createAnimations: function() {
                 dhuhrCard.appendChild(sunElement);
             }
             
-            // Create sun beams
+            // Create sun rays
+            if (!dhuhrCard.querySelector('.dhuhr-rays')) {
+                const sunRays = document.createElement('div');
+                sunRays.className = 'dhuhr-rays';
+                for (let i = 0; i < 5; i++) {
+                    const ray = document.createElement('div');
+                    ray.className = 'dhuhr-ray';
+                    sunRays.appendChild(ray);
+                }
+                dhuhrCard.appendChild(sunRays);
+            }
+            
+            // Create rotating sun beams
             if (!dhuhrCard.querySelector('.dhuhr-beams')) {
                 const sunBeams = document.createElement('div');
                 sunBeams.className = 'dhuhr-beams';
@@ -367,6 +379,31 @@ createAnimations: function() {
                 }
                 dhuhrCard.appendChild(sunBeams);
             }
+            
+            // Create clouds
+            if (!dhuhrCard.querySelector('.dhuhr-clouds')) {
+                const clouds = document.createElement('div');
+                clouds.className = 'dhuhr-clouds';
+                for (let i = 0; i < 2; i++) {
+                    const cloud = document.createElement('div');
+                    cloud.className = 'dhuhr-cloud';
+                    clouds.appendChild(cloud);
+                }
+                dhuhrCard.appendChild(clouds);
+            }
+            
+            // Create birds
+            if (!dhuhrCard.querySelector('.dhuhr-birds')) {
+                const birds = document.createElement('div');
+                birds.className = 'dhuhr-birds';
+                for (let i = 0; i < 3; i++) {
+                    const bird = document.createElement('div');
+                    bird.className = 'dhuhr-bird';
+                    birds.appendChild(bird);
+                }
+                dhuhrCard.appendChild(birds);
+            }
+        }
             
             // Create heat waves
             if (!dhuhrCard.querySelector('.dhuhr-heat-waves')) {
