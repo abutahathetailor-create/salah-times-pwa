@@ -40,27 +40,35 @@ function createFajrAnimations() {
 }
     
     function createSunriseAnimations() {
-        const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
-        if (!sunriseCard || sunriseCard.querySelector('.sun-rays')) return;
-        
-        const sunRays = document.createElement('div');
-        sunRays.className = 'sun-rays';
-        for (let i = 0; i < 4; i++) {
-            const ray = document.createElement('div');
-            ray.className = 'ray';
-            sunRays.appendChild(ray);
-        }
-        
-        const clouds = document.createElement('div');
-        clouds.className = 'clouds';
-        for (let i = 0; i < 2; i++) {
-            const cloud = document.createElement('div');
-            cloud.className = 'cloud';
-            clouds.appendChild(cloud);
-        }
-        
-        sunriseCard.appendChild(sunRays);
-        sunriseCard.appendChild(clouds);
+   const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
+            if (!sunriseCard || sunriseCard.querySelector('.sunrise-sun')) return;
+            
+            console.log('🌅 Creating Sunrise animations');
+            
+            // Create sun element
+            const sunElement = document.createElement('div');
+            sunElement.className = 'sunrise-sun';
+            sunriseCard.appendChild(sunElement);
+            
+            // Create sun rays
+            const sunRays = document.createElement('div');
+            sunRays.className = 'sunrise-rays';
+            for (let i = 0; i < 4; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'sunrise-ray';
+                sunRays.appendChild(ray);
+            }
+            sunriseCard.appendChild(sunRays);
+            
+            // Create clouds
+            const clouds = document.createElement('div');
+            clouds.className = 'sunrise-clouds';
+            for (let i = 0; i < 2; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'sunrise-cloud';
+                clouds.appendChild(cloud);
+            }
+            sunriseCard.appendChild(clouds);
     }
     
     // Add other animation functions here...
