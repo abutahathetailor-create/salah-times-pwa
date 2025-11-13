@@ -2,29 +2,42 @@
 window.Animations = (function() {
     'use strict';
     
-    function createFajrAnimations() {
-        const fajrCard = document.querySelector('.prayer-card[data-prayer="Fajr"]');
-        if (!fajrCard || fajrCard.querySelector('.birds-container')) return;
-        
-        const birdsContainer = document.createElement('div');
-        birdsContainer.className = 'birds-container';
-        for (let i = 0; i < 5; i++) {
-            const bird = document.createElement('div');
-            bird.className = 'bird';
-            birdsContainer.appendChild(bird);
-        }
-        
-        const starsContainer = document.createElement('div');
-        starsContainer.className = 'stars';
-        for (let i = 0; i < 5; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            starsContainer.appendChild(star);
-        }
-        
-        fajrCard.appendChild(birdsContainer);
-        fajrCard.appendChild(starsContainer);
+// In animations.js - update createFajrAnimations function
+function createFajrAnimations() {
+    const fajrCard = document.querySelector('.prayer-card[data-prayer="Fajr"]');
+    if (!fajrCard || fajrCard.querySelector('.birds-container')) return;
+    
+    // Create birds container
+    const birdsContainer = document.createElement('div');
+    birdsContainer.className = 'birds-container';
+    for (let i = 0; i < 5; i++) {
+        const bird = document.createElement('div');
+        bird.className = 'bird';
+        birdsContainer.appendChild(bird);
     }
+    
+    // Create stars container
+    const starsContainer = document.createElement('div');
+    starsContainer.className = 'stars';
+    for (let i = 0; i < 5; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        starsContainer.appendChild(star);
+    }
+    
+    // Create clouds container for Fajr
+    const cloudsContainer = document.createElement('div');
+    cloudsContainer.className = 'fajr-clouds';
+    for (let i = 0; i < 3; i++) {
+        const cloud = document.createElement('div');
+        cloud.className = 'fajr-cloud';
+        cloudsContainer.appendChild(cloud);
+    }
+    
+    fajrCard.appendChild(birdsContainer);
+    fajrCard.appendChild(starsContainer);
+    fajrCard.appendChild(cloudsContainer);
+}
     
     function createSunriseAnimations() {
         const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
