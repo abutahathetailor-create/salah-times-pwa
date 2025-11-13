@@ -251,32 +251,53 @@
                 : this.defaultPrayerTimes;
         },
         
-        createAnimations: function() {
-            // Fajr animations
-            const fajrCard = document.querySelector('.prayer-card[data-prayer="Fajr"]');
-            if (fajrCard && !fajrCard.querySelector('.birds-container')) {
-                const birdsContainer = document.createElement('div');
-                birdsContainer.className = 'birds-container';
-                for (let i = 0; i < 5; i++) {
-                    const bird = document.createElement('div');
-                    bird.className = 'bird';
-                    birdsContainer.appendChild(bird);
-                }
-                
-                const starsContainer = document.createElement('div');
-                starsContainer.className = 'stars';
-                for (let i = 0; i < 5; i++) {
-                    const star = document.createElement('div');
-                    star.className = 'star';
-                    starsContainer.appendChild(star);
-                }
-                
-                fajrCard.appendChild(birdsContainer);
-                fajrCard.appendChild(starsContainer);
+createAnimations: function() {
+    console.log('🎨 Creating animations...');
+    
+    // Fajr animations
+    const fajrCard = document.querySelector('.prayer-card[data-prayer="Fajr"]');
+    if (fajrCard) {
+        console.log('🕋 Creating Fajr animations');
+        
+        // Create birds container
+        if (!fajrCard.querySelector('.birds-container')) {
+            const birdsContainer = document.createElement('div');
+            birdsContainer.className = 'birds-container';
+            for (let i = 0; i < 5; i++) {
+                const bird = document.createElement('div');
+                bird.className = 'bird';
+                birdsContainer.appendChild(bird);
             }
-            
-            // Add other animations as needed...
-        },
+            fajrCard.appendChild(birdsContainer);
+        }
+        
+        // Create stars container
+        if (!fajrCard.querySelector('.stars')) {
+            const starsContainer = document.createElement('div');
+            starsContainer.className = 'stars';
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                starsContainer.appendChild(star);
+            }
+            fajrCard.appendChild(starsContainer);
+        }
+        
+        // Create clouds container for Fajr
+        if (!fajrCard.querySelector('.fajr-clouds')) {
+            const cloudsContainer = document.createElement('div');
+            cloudsContainer.className = 'fajr-clouds';
+            for (let i = 0; i < 3; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'fajr-cloud';
+                cloudsContainer.appendChild(cloud);
+            }
+            fajrCard.appendChild(cloudsContainer);
+        }
+    }
+    
+    // Add other prayer animations here as we fix them
+},
         
         updateCountdown: function() {
             const now = new Date();
