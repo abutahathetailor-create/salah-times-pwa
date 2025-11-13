@@ -1,4 +1,4 @@
-/* DHUHR STYLES - PERFECTED SUN POSITION */
+/* DHUHR STYLES - SUNRISE STYLE BUT LEFT SIDE */
 .prayer-card[data-prayer="Dhuhr"] {
     background: linear-gradient(135deg, 
         #87CEEB 0%, 
@@ -9,12 +9,13 @@
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    text-align: center;
+    text-align: right;
+    padding-right: 20px;
     box-shadow: 0 8px 32px rgba(0, 191, 255, 0.3);
 }
 
 .prayer-card[data-prayer="Dhuhr"] .prayer-name {
-    justify-content: center;
+    justify-content: flex-end;
     color: #1a5276;
     font-size: 1.2rem;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -36,68 +37,68 @@
     position: relative;
 }
 
-/* PERFECTED Dhuhr Sun - Higher, Smaller, Circular Motion */
+/* Dhuhr Sun - Same as Sunrise but on LEFT side */
 .dhuhr-sun {
     position: absolute;
-    top: 30%; /* Higher position */
-    left: 50%;
-    width: 45px; /* Smaller size */
-    height: 45px;
+    top: 50%;
+    left: 30px; /* Left side position */
+    width: 60px;
+    height: 60px;
     background: radial-gradient(circle, 
         #FFFF00 0%, 
-        #FFD700 25%, 
-        #FFA500 50%, 
-        #FF8C00 75%, 
-        transparent 85%);
+        #FFD700 20%, 
+        #FF8C00 40%, 
+        #FF4500 60%, 
+        transparent 80%);
     border-radius: 50%;
     animation: 
-        dhuhrOrbit 18s linear infinite,
-        dhuhrPulse 4s ease-in-out infinite,
-        dhuhrGlow 5s ease-in-out infinite;
+        dhuhrOrbit 15s linear infinite,
+        dhuhrPulse 3s ease-in-out infinite,
+        dhuhrGlow 4s ease-in-out infinite;
     box-shadow: 
-        0 0 40px rgba(255, 215, 0, 0.9),
-        0 0 80px rgba(255, 165, 0, 0.7),
-        0 0 120px rgba(255, 140, 0, 0.5);
-    filter: brightness(1.3);
+        0 0 50px rgba(255, 215, 0, 1),
+        0 0 100px rgba(255, 140, 0, 0.8),
+        0 0 150px rgba(255, 69, 0, 0.6),
+        inset 0 0 20px rgba(255, 255, 255, 0.8);
+    filter: brightness(1.5) contrast(1.2);
     z-index: 2;
-    transform-origin: center;
 }
 
-/* Circular orbit animation - like a clock */
+/* Circular orbit animation - LEFT side version */
 @keyframes dhuhrOrbit {
     0% {
         transform: 
             translate(-50%, -50%) 
             rotate(0deg) 
-            translateX(35px) 
+            translateX(50px) 
             rotate(0deg);
     }
     25% {
         transform: 
             translate(-50%, -50%) 
             rotate(90deg) 
-            translateX(35px) 
+            translateX(50px) 
             rotate(-90deg);
     }
     50% {
         transform: 
             translate(-50%, -50%) 
             rotate(180deg) 
-            translateX(35px) 
+            translateX(50px) 
             rotate(-180deg);
     }
     75% {
         transform: 
             translate(-50%, -50%) 
             rotate(270deg) 
-            translateX(35px) 
+            translateX(50px) 
             rotate(-270deg);
     }
     100% {
         transform: 
             translate(-50%, -50%) 
             rotate(360deg) 
-            translateX(35px) 
+            translateX(50px) 
             rotate(-360deg);
     }
 }
@@ -108,7 +109,7 @@
         transform: 
             translate(-50%, -50%) 
             rotate(0deg) 
-            translateX(35px) 
+            translateX(50px) 
             rotate(0deg)
             scale(1);
     }
@@ -116,9 +117,9 @@
         transform: 
             translate(-50%, -50%) 
             rotate(0deg) 
-            translateX(35px) 
+            translateX(50px) 
             rotate(0deg)
-            scale(1.15);
+            scale(1.2);
     }
 }
 
@@ -126,25 +127,101 @@
 @keyframes dhuhrGlow {
     0%, 100% { 
         box-shadow: 
-            0 0 40px rgba(255, 215, 0, 0.9),
-            0 0 80px rgba(255, 165, 0, 0.7),
-            0 0 120px rgba(255, 140, 0, 0.5);
+            0 0 50px rgba(255, 215, 0, 1),
+            0 0 100px rgba(255, 140, 0, 0.8),
+            0 0 150px rgba(255, 69, 0, 0.6);
     }
     50% { 
         box-shadow: 
-            0 0 60px rgba(255, 215, 0, 1),
-            0 0 100px rgba(255, 165, 0, 0.8),
-            0 0 150px rgba(255, 140, 0, 0.6);
+            0 0 70px rgba(255, 215, 0, 1),
+            0 0 140px rgba(255, 140, 0, 0.9),
+            0 0 200px rgba(255, 69, 0, 0.7);
     }
 }
 
-/* Sun beams radiating from center */
+/* Sun rays animation */
+.dhuhr-rays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dhuhr-ray {
+    position: absolute;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 100, 0.8), 
+        rgba(255, 255, 50, 1), 
+        rgba(255, 255, 100, 0.8), 
+        transparent);
+    animation: dhuhrRayMove 6s linear infinite;
+    opacity: 0.8;
+}
+
+.dhuhr-ray:nth-child(1) { 
+    top: 15%; 
+    left: -50%; 
+    width: 200%; 
+    height: 3px; 
+    animation-delay: 0s; 
+}
+.dhuhr-ray:nth-child(2) { 
+    top: 35%; 
+    left: -50%; 
+    width: 200%; 
+    height: 2px; 
+    animation-delay: 1s; 
+}
+.dhuhr-ray:nth-child(3) { 
+    top: 55%; 
+    left: -50%; 
+    width: 200%; 
+    height: 2.5px; 
+    animation-delay: 2s; 
+}
+.dhuhr-ray:nth-child(4) { 
+    top: 75%; 
+    left: -50%; 
+    width: 200%; 
+    height: 2px; 
+    animation-delay: 3s; 
+}
+.dhuhr-ray:nth-child(5) { 
+    top: 25%; 
+    left: -50%; 
+    width: 200%; 
+    height: 1.5px; 
+    animation-delay: 4s; 
+}
+
+@keyframes dhuhrRayMove {
+    0% { 
+        transform: translateX(0); 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 0.9; 
+    }
+    90% { 
+        opacity: 0.9; 
+    }
+    100% { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+}
+
+/* Rotating Sun Beams */
 .dhuhr-beams {
     position: absolute;
     top: 50%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
+    left: 30px; /* Match sun position */
+    width: 120px;
+    height: 120px;
     transform: translate(-50%, -50%);
     z-index: 1;
 }
@@ -153,38 +230,35 @@
     position: absolute;
     background: linear-gradient(90deg, 
         transparent, 
-        rgba(255, 255, 150, 0.7), 
-        rgba(255, 255, 100, 0.9), 
-        rgba(255, 255, 150, 0.7), 
+        rgba(255, 255, 100, 0.6), 
         transparent);
-    animation: dhuhrBeamRotate 12s linear infinite;
+    animation: dhuhrBeamRotate 8s linear infinite;
     transform-origin: center;
-    opacity: 0.8;
 }
 
 .dhuhr-beam:nth-child(1) { 
-    width: 2px; 
-    height: 100px; 
+    width: 3px; 
+    height: 120px; 
     top: 0; 
     left: 50%; 
 }
 .dhuhr-beam:nth-child(2) { 
-    width: 2px; 
-    height: 100px; 
+    width: 3px; 
+    height: 120px; 
     top: 0; 
     left: 50%; 
     transform: rotate(45deg); 
 }
 .dhuhr-beam:nth-child(3) { 
-    width: 2px; 
-    height: 100px; 
+    width: 3px; 
+    height: 120px; 
     top: 0; 
     left: 50%; 
     transform: rotate(90deg); 
 }
 .dhuhr-beam:nth-child(4) { 
-    width: 2px; 
-    height: 100px; 
+    width: 3px; 
+    height: 120px; 
     top: 0; 
     left: 50%; 
     transform: rotate(135deg); 
@@ -201,130 +275,198 @@
     }
 }
 
-/* Heat waves at bottom */
-.dhuhr-heat-waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 25%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.dhuhr-heat-wave {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 8px;
-    background: linear-gradient(90deg, 
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        rgba(255, 255, 255, 0.7),
-        rgba(255, 255, 255, 0.4),
-        transparent
-    );
-    animation: dhuhrHeatShimmer 5s ease-in-out infinite;
-    opacity: 0.6;
-}
-
-.dhuhr-heat-wave:nth-child(1) { 
-    animation-delay: 0s; 
-    height: 6px;
-}
-.dhuhr-heat-wave:nth-child(2) { 
-    animation-delay: 1.5s; 
-    height: 4px;
-}
-.dhuhr-heat-wave:nth-child(3) { 
-    animation-delay: 3s; 
-    height: 5px;
-}
-
-@keyframes dhuhrHeatShimmer {
-    0%, 100% { 
-        transform: translateY(0); 
-        opacity: 0.3; 
-    }
-    50% { 
-        transform: translateY(-8px); 
-        opacity: 0.7; 
-    }
-}
-
-/* Floating light particles */
-.dhuhr-particles {
+/* Cloud animation */
+.dhuhr-clouds {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+    overflow: hidden;
+    z-index: 3;
 }
 
-.dhuhr-particle {
+.dhuhr-cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50px;
+    animation: dhuhrCloudFloat 25s linear infinite;
+    filter: blur(2px);
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.dhuhr-cloud::before, .dhuhr-cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 50%;
-    animation: dhuhrParticleFloat 15s linear infinite;
-    opacity: 0;
 }
 
-.dhuhr-particle:nth-child(1) { 
-    top: 20%; left: 15%; 
-    width: 2px; height: 2px; 
-    animation-delay: 0s; 
+.dhuhr-cloud:nth-child(1) {
+    top: 20%; 
+    left: -80px;
+    width: 60px; 
+    height: 25px;
+    animation-duration: 30s;
 }
-.dhuhr-particle:nth-child(2) { 
-    top: 40%; left: 65%; 
-    width: 1.5px; height: 1.5px; 
-    animation-delay: 3s; 
+.dhuhr-cloud:nth-child(1)::before { 
+    top: -10px; 
+    left: 8px; 
+    width: 30px; 
+    height: 30px; 
 }
-.dhuhr-particle:nth-child(3) { 
-    top: 60%; left: 35%; 
-    width: 2.5px; height: 2.5px; 
-    animation-delay: 6s; 
-}
-.dhuhr-particle:nth-child(4) { 
-    top: 80%; left: 75%; 
-    width: 1px; height: 1px; 
-    animation-delay: 9s; 
-}
-.dhuhr-particle:nth-child(5) { 
-    top: 30%; left: 85%; 
-    width: 2px; height: 2px; 
-    animation-delay: 12s; 
+.dhuhr-cloud:nth-child(1)::after { 
+    top: -8px; 
+    right: 8px; 
+    width: 25px; 
+    height: 25px; 
 }
 
-@keyframes dhuhrParticleFloat {
+.dhuhr-cloud:nth-child(2) {
+    top: 65%; 
+    left: -120px;
+    width: 80px; 
+    height: 30px;
+    animation-duration: 40s;
+    animation-delay: 8s;
+}
+.dhuhr-cloud:nth-child(2)::before { 
+    top: -12px; 
+    left: 10px; 
+    width: 35px; 
+    height: 35px; 
+}
+.dhuhr-cloud:nth-child(2)::after { 
+    top: -10px; 
+    right: 10px; 
+    width: 30px; 
+    height: 30px; 
+}
+
+@keyframes dhuhrCloudFloat {
     0% { 
-        transform: translateY(0) rotate(0deg); 
+        transform: translateX(-150px); 
         opacity: 0; 
     }
     10% { 
-        opacity: 0.8; 
+        opacity: 0.9; 
     }
     90% { 
-        opacity: 0.8; 
+        opacity: 0.9; 
     }
     100% { 
-        transform: translateY(-80px) rotate(360deg); 
+        transform: translateX(calc(100% + 150px)); 
         opacity: 0; 
+    }
+}
+
+/* Birds Animation */
+.dhuhr-birds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.dhuhr-bird {
+    position: absolute;
+    width: 8px;
+    height: 4px;
+    background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+    border-radius: 50%;
+    animation: dhuhrBirdFly 20s linear infinite;
+    filter: 
+        drop-shadow(0 0 2px rgba(255, 255, 255, 0.8))
+        drop-shadow(0 0 4px rgba(100, 181, 246, 0.6));
+    opacity: 0.8;
+}
+
+.dhuhr-bird::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -3px;
+    width: 6px;
+    height: 3px;
+    background: linear-gradient(135deg, #ffffff 0%, #bbdefb 100%);
+    border-radius: 50% 50% 0 0;
+    transform: rotate(-35deg);
+}
+
+.dhuhr-bird::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -3px;
+    width: 6px;
+    height: 3px;
+    background: linear-gradient(135deg, #ffffff 0%, #bbdefb 100%);
+    border-radius: 50% 50% 0 0;
+    transform: rotate(35deg);
+}
+
+/* Bird positions and animations */
+.dhuhr-bird:nth-child(1) {
+    top: 25%;
+    animation-duration: 25s;
+    animation-delay: 0s;
+}
+
+.dhuhr-bird:nth-child(2) {
+    top: 50%;
+    animation-duration: 20s;
+    animation-delay: 6s;
+}
+
+.dhuhr-bird:nth-child(3) {
+    top: 70%;
+    animation-duration: 30s;
+    animation-delay: 12s;
+}
+
+@keyframes dhuhrBirdFly {
+    0% {
+        transform: translateX(-60px) translateY(0px) scale(0.7) rotate(-5deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+        transform: translateX(10%) translateY(-3px) scale(0.9) rotate(-3deg);
+    }
+    50% {
+        transform: translateX(50%) translateY(-2px) scale(1) rotate(1deg);
+    }
+    90% {
+        opacity: 0.8;
+        transform: translateX(90%) translateY(-1px) scale(0.9) rotate(5deg);
+    }
+    100% {
+        transform: translateX(calc(100% + 60px)) translateY(0px) scale(0.7) rotate(5deg);
+        opacity: 0;
     }
 }
 
 /* Mobile optimization */
 @media (max-width: 400px) {
+    .prayer-card[data-prayer="Dhuhr"] {
+        padding-right: 15px;
+    }
+    
     .dhuhr-sun {
-        width: 35px;
-        height: 35px;
-        top: 25%;
+        width: 50px;
+        height: 50px;
+        left: 20px;
     }
     
     .dhuhr-beams {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
+        left: 20px;
     }
 }
