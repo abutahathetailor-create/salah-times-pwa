@@ -1,4 +1,4 @@
-/* Dhuhr-specific styles */
+/* DHUHR STYLES - PERFECTED SUN POSITION */
 .prayer-card[data-prayer="Dhuhr"] {
     background: linear-gradient(135deg, 
         #87CEEB 0%, 
@@ -18,6 +18,8 @@
     color: #1a5276;
     font-size: 1.2rem;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    position: relative;
 }
 
 .prayer-card[data-prayer="Dhuhr"] .prayer-name i {
@@ -30,86 +32,299 @@
     font-size: 1.6rem;
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
     font-weight: 800;
+    z-index: 10;
+    position: relative;
 }
 
-/* Sun at zenith */
-.prayer-card[data-prayer="Dhuhr"]::before {
-    content: '';
+/* PERFECTED Dhuhr Sun - Higher, Smaller, Circular Motion */
+.dhuhr-sun {
     position: absolute;
-    top: 50%;
+    top: 30%; /* Higher position */
     left: 50%;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, #FFD700 0%, #FF8C00 30%, transparent 70%);
+    width: 45px; /* Smaller size */
+    height: 45px;
+    background: radial-gradient(circle, 
+        #FFFF00 0%, 
+        #FFD700 25%, 
+        #FFA500 50%, 
+        #FF8C00 75%, 
+        transparent 85%);
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: zenithGlow 3s ease-in-out infinite;
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+    animation: 
+        dhuhrOrbit 18s linear infinite,
+        dhuhrPulse 4s ease-in-out infinite,
+        dhuhrGlow 5s ease-in-out infinite;
+    box-shadow: 
+        0 0 40px rgba(255, 215, 0, 0.9),
+        0 0 80px rgba(255, 165, 0, 0.7),
+        0 0 120px rgba(255, 140, 0, 0.5);
+    filter: brightness(1.3);
+    z-index: 2;
+    transform-origin: center;
 }
 
-@keyframes zenithGlow {
-    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+/* Circular orbit animation - like a clock */
+@keyframes dhuhrOrbit {
+    0% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(0deg) 
+            translateX(35px) 
+            rotate(0deg);
+    }
+    25% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(90deg) 
+            translateX(35px) 
+            rotate(-90deg);
+    }
+    50% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(180deg) 
+            translateX(35px) 
+            rotate(-180deg);
+    }
+    75% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(270deg) 
+            translateX(35px) 
+            rotate(-270deg);
+    }
+    100% {
+        transform: 
+            translate(-50%, -50%) 
+            rotate(360deg) 
+            translateX(35px) 
+            rotate(-360deg);
+    }
 }
 
-/* Sun beams radiating */
-.sun-beams {
+/* Pulsing effect */
+@keyframes dhuhrPulse {
+    0%, 100% { 
+        transform: 
+            translate(-50%, -50%) 
+            rotate(0deg) 
+            translateX(35px) 
+            rotate(0deg)
+            scale(1);
+    }
+    50% { 
+        transform: 
+            translate(-50%, -50%) 
+            rotate(0deg) 
+            translateX(35px) 
+            rotate(0deg)
+            scale(1.15);
+    }
+}
+
+/* Glowing effect */
+@keyframes dhuhrGlow {
+    0%, 100% { 
+        box-shadow: 
+            0 0 40px rgba(255, 215, 0, 0.9),
+            0 0 80px rgba(255, 165, 0, 0.7),
+            0 0 120px rgba(255, 140, 0, 0.5);
+    }
+    50% { 
+        box-shadow: 
+            0 0 60px rgba(255, 215, 0, 1),
+            0 0 100px rgba(255, 165, 0, 0.8),
+            0 0 150px rgba(255, 140, 0, 0.6);
+    }
+}
+
+/* Sun beams radiating from center */
+.dhuhr-beams {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 100px;
     height: 100px;
     transform: translate(-50%, -50%);
+    z-index: 1;
 }
 
-.beam {
+.dhuhr-beam {
     position: absolute;
-    background: linear-gradient(90deg, transparent, #FFD700, transparent);
-    animation: beamRotate 10s linear infinite;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 150, 0.7), 
+        rgba(255, 255, 100, 0.9), 
+        rgba(255, 255, 150, 0.7), 
+        transparent);
+    animation: dhuhrBeamRotate 12s linear infinite;
     transform-origin: center;
+    opacity: 0.8;
 }
 
-.beam:nth-child(1) { width: 2px; height: 100px; top: 0; left: 50%; }
-.beam:nth-child(2) { width: 2px; height: 100px; top: 0; left: 50%; transform: rotate(45deg); }
-.beam:nth-child(3) { width: 2px; height: 100px; top: 0; left: 50%; transform: rotate(90deg); }
-.beam:nth-child(4) { width: 2px; height: 100px; top: 0; left: 50%; transform: rotate(135deg); }
-
-@keyframes beamRotate {
-    0% { transform: rotate(0deg); opacity: 0.5; }
-    100% { transform: rotate(360deg); opacity: 0.5; }
+.dhuhr-beam:nth-child(1) { 
+    width: 2px; 
+    height: 100px; 
+    top: 0; 
+    left: 50%; 
+}
+.dhuhr-beam:nth-child(2) { 
+    width: 2px; 
+    height: 100px; 
+    top: 0; 
+    left: 50%; 
+    transform: rotate(45deg); 
+}
+.dhuhr-beam:nth-child(3) { 
+    width: 2px; 
+    height: 100px; 
+    top: 0; 
+    left: 50%; 
+    transform: rotate(90deg); 
+}
+.dhuhr-beam:nth-child(4) { 
+    width: 2px; 
+    height: 100px; 
+    top: 0; 
+    left: 50%; 
+    transform: rotate(135deg); 
 }
 
-/* Heat waves */
-.heat-waves {
+@keyframes dhuhrBeamRotate {
+    0% { 
+        transform: rotate(0deg); 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: rotate(360deg); 
+        opacity: 0.7; 
+    }
+}
+
+/* Heat waves at bottom */
+.dhuhr-heat-waves {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 30%;
+    height: 25%;
     pointer-events: none;
+    z-index: 1;
 }
 
-.heat-wave {
+.dhuhr-heat-wave {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 10px;
+    height: 8px;
     background: linear-gradient(90deg, 
         transparent,
-        rgba(255, 255, 255, 0.3),
-        rgba(255, 255, 255, 0.6),
-        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.4),
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.4),
         transparent
     );
-    animation: heatShimmer 4s ease-in-out infinite;
+    animation: dhuhrHeatShimmer 5s ease-in-out infinite;
+    opacity: 0.6;
 }
 
-.heat-wave:nth-child(1) { animation-delay: 0s; }
-.heat-wave:nth-child(2) { animation-delay: 1s; }
-.heat-wave:nth-child(3) { animation-delay: 2s; }
+.dhuhr-heat-wave:nth-child(1) { 
+    animation-delay: 0s; 
+    height: 6px;
+}
+.dhuhr-heat-wave:nth-child(2) { 
+    animation-delay: 1.5s; 
+    height: 4px;
+}
+.dhuhr-heat-wave:nth-child(3) { 
+    animation-delay: 3s; 
+    height: 5px;
+}
 
-@keyframes heatShimmer {
-    0%, 100% { transform: translateY(0); opacity: 0; }
-    50% { transform: translateY(-10px); opacity: 0.7; }
+@keyframes dhuhrHeatShimmer {
+    0%, 100% { 
+        transform: translateY(0); 
+        opacity: 0.3; 
+    }
+    50% { 
+        transform: translateY(-8px); 
+        opacity: 0.7; 
+    }
+}
+
+/* Floating light particles */
+.dhuhr-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dhuhr-particle {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: dhuhrParticleFloat 15s linear infinite;
+    opacity: 0;
+}
+
+.dhuhr-particle:nth-child(1) { 
+    top: 20%; left: 15%; 
+    width: 2px; height: 2px; 
+    animation-delay: 0s; 
+}
+.dhuhr-particle:nth-child(2) { 
+    top: 40%; left: 65%; 
+    width: 1.5px; height: 1.5px; 
+    animation-delay: 3s; 
+}
+.dhuhr-particle:nth-child(3) { 
+    top: 60%; left: 35%; 
+    width: 2.5px; height: 2.5px; 
+    animation-delay: 6s; 
+}
+.dhuhr-particle:nth-child(4) { 
+    top: 80%; left: 75%; 
+    width: 1px; height: 1px; 
+    animation-delay: 9s; 
+}
+.dhuhr-particle:nth-child(5) { 
+    top: 30%; left: 85%; 
+    width: 2px; height: 2px; 
+    animation-delay: 12s; 
+}
+
+@keyframes dhuhrParticleFloat {
+    0% { 
+        transform: translateY(0) rotate(0deg); 
+        opacity: 0; 
+    }
+    10% { 
+        opacity: 0.8; 
+    }
+    90% { 
+        opacity: 0.8; 
+    }
+    100% { 
+        transform: translateY(-80px) rotate(360deg); 
+        opacity: 0; 
+    }
+}
+
+/* Mobile optimization */
+@media (max-width: 400px) {
+    .dhuhr-sun {
+        width: 35px;
+        height: 35px;
+        top: 25%;
+    }
+    
+    .dhuhr-beams {
+        width: 80px;
+        height: 80px;
+    }
 }
