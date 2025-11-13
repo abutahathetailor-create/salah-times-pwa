@@ -1,364 +1,360 @@
-/* SUNRISE STYLES - ENHANCED VISIBLE ANIMATION */
+/* REALISTIC SUNRISE STYLES - NIGHT TO DAY TRANSITION */
 .prayer-card[data-prayer="Sunrise"] {
-    background: linear-gradient(135deg, 
-        #ff6b35 0%, 
-        #ff8e53 20%, 
-        #ffb174 40%, 
-        #ffd166 60%, 
-        #f9f7f3 80%, 
-        #a8e6cf 100%);
+    background: linear-gradient(0deg, 
+        /* Dynamic gradient - changes with animation */
+        #FFD166 0%,    /* Bright yellow at horizon */
+        #FF9E6D 20%,   /* Orange */
+        #FF7B9C 40%,   /* Pink */
+        #6B5B95 70%,   /* Purple */
+        #2C2C54 100%   /* Dark blue night at top */
+    );
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.4);
     text-align: left;
     padding-left: 20px;
-    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+    animation: skyTransition 30s ease-in-out infinite;
+}
+
+@keyframes skyTransition {
+    0% {
+        background: linear-gradient(0deg, 
+            #0c1445 0%,     /* Dark night blue at bottom */
+            #1a237e 30%, 
+            #283593 60%, 
+            #1a237e 100%    /* Dark blue at top */
+        );
+    }
+    25% {
+        background: linear-gradient(0deg, 
+            #FF6B35 0%,     /* Sunrise starts at bottom */
+            #FF8E53 20%, 
+            #6B5B95 60%, 
+            #2C2C54 100%    /* Night still at top */
+        );
+    }
+    50% {
+        background: linear-gradient(0deg, 
+            #FFD166 0%,     /* Bright sunrise */
+            #FF9E6D 30%, 
+            #FF7B9C 60%, 
+            #6B5B95 100%    /* Purple transition */
+        );
+    }
+    75% {
+        background: linear-gradient(0deg, 
+            #87CEEB 0%,     /* Day blue begins */
+            #FFD166 30%, 
+            #FF9E6D 60%, 
+            #FF7B9C 100%    /* Pink/orange fade */
+        );
+    }
+    100% {
+        background: linear-gradient(0deg, 
+            #87CEEB 0%,     /* Full daylight */
+            #98D8E8 30%, 
+            #B0E0E6 60%, 
+            #87CEEB 100%    /* Clear blue sky */
+        );
+    }
 }
 
 .prayer-card[data-prayer="Sunrise"] .prayer-name {
     justify-content: flex-start;
-    color: #7c4700;
+    color: #2C2C54;
     font-size: 1.2rem;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    z-index: 10;
+    z-index: 20;
     position: relative;
 }
 
 .prayer-card[data-prayer="Sunrise"] .prayer-name i {
-    color: #ff6b35;
+    color: #FF6B35;
     filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.6));
 }
 
 .prayer-card[data-prayer="Sunrise"] .prayer-time {
-    color: #d35400;
+    color: #2C2C54;
     font-size: 1.6rem;
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
     font-weight: 800;
-    z-index: 10;
+    z-index: 20;
     position: relative;
 }
 
-/* ENHANCED Sun - More Visible Animation */
-.sunrise-sun {
+/* Horizon Line */
+.sunrise-horizon {
     position: absolute;
-    top: 50%;
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    bottom: 30%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+    z-index: 5;
+}
+
+/* Realistic Rising Sun */
+.rising-sun {
+    position: absolute;
+    bottom: 30%; /* Starts at horizon */
+    left: 50%;
+    width: 70px; /* Larger when near horizon */
+    height: 70px;
     background: radial-gradient(circle, 
         #FFFF00 0%, 
         #FFD700 20%, 
         #FF8C00 40%, 
         #FF4500 60%, 
-        transparent 80%);
+        transparent 70%
+    );
     border-radius: 50%;
-    animation: 
-        sunriseOrbit 15s linear infinite,
-        sunPulse 3s ease-in-out infinite,
-        sunGlow 4s ease-in-out infinite;
+    transform: translateX(-50%);
+    animation: sunRise 30s ease-in-out infinite;
     box-shadow: 
-        0 0 50px rgba(255, 215, 0, 1),
-        0 0 100px rgba(255, 140, 0, 0.8),
-        0 0 150px rgba(255, 69, 0, 0.6),
-        inset 0 0 20px rgba(255, 255, 255, 0.8);
-    filter: brightness(1.5) contrast(1.2);
+        0 0 60px rgba(255, 215, 0, 0.9),
+        0 0 120px rgba(255, 140, 0, 0.7),
+        0 0 180px rgba(255, 69, 0, 0.5);
+    filter: brightness(1.2);
+    z-index: 6;
+}
+
+@keyframes sunRise {
+    0% {
+        bottom: 30%; /* At horizon */
+        width: 80px;
+        height: 40px; /* Half sun - elliptical */
+        opacity: 0.3;
+        box-shadow: 
+            0 0 40px rgba(255, 215, 0, 0.6),
+            0 0 80px rgba(255, 140, 0, 0.4),
+            0 0 120px rgba(255, 69, 0, 0.2);
+    }
+    25% {
+        bottom: 45%;
+        width: 70px;
+        height: 70px; /* Becomes circular */
+        opacity: 0.7;
+    }
+    50% {
+        bottom: 60%;
+        width: 60px;
+        height: 60px; /* Smaller as it rises */
+        opacity: 1;
+    }
+    75% {
+        bottom: 75%;
+        width: 50px;
+        height: 50px;
+        opacity: 1;
+    }
+    100% {
+        bottom: 85%; /* Near top */
+        width: 45px;
+        height: 45px;
+        opacity: 1;
+        box-shadow: 
+            0 0 30px rgba(255, 215, 0, 0.8),
+            0 0 60px rgba(255, 140, 0, 0.6),
+            0 0 90px rgba(255, 69, 0, 0.4);
+    }
+}
+
+/* Sun Rays - Emanate from the sun */
+.sun-rays {
+    position: absolute;
+    bottom: 30%; /* Start at horizon with sun */
+    left: 50%;
+    width: 200px;
+    height: 150px;
+    transform: translateX(-50%);
+    z-index: 4;
+    animation: raysRise 30s ease-in-out infinite;
+}
+
+.sun-ray {
+    position: absolute;
+    background: linear-gradient(0deg, 
+        transparent,
+        rgba(255, 255, 100, 0.8),
+        rgba(255, 255, 50, 0.9),
+        transparent
+    );
+    bottom: 0;
+    left: 50%;
+    transform-origin: bottom center;
+    animation: raySpread 30s ease-in-out infinite;
+}
+
+.sun-ray:nth-child(1) { 
+    width: 3px; 
+    height: 100px; 
+    transform: translateX(-50%) rotate(-60deg);
+    animation-delay: 0s;
+}
+.sun-ray:nth-child(2) { 
+    width: 3px; 
+    height: 120px; 
+    transform: translateX(-50%) rotate(-30deg);
+    animation-delay: 1s;
+}
+.sun-ray:nth-child(3) { 
+    width: 3px; 
+    height: 140px; 
+    transform: translateX(-50%) rotate(0deg);
+    animation-delay: 2s;
+}
+.sun-ray:nth-child(4) { 
+    width: 3px; 
+    height: 120px; 
+    transform: translateX(-50%) rotate(30deg);
+    animation-delay: 3s;
+}
+.sun-ray:nth-child(5) { 
+    width: 3px; 
+    height: 100px; 
+    transform: translateX(-50%) rotate(60deg);
+    animation-delay: 4s;
+}
+
+@keyframes raysRise {
+    0%, 100% { bottom: 30%; opacity: 0; }
+    10% { opacity: 0.5; }
+    80% { opacity: 0.8; }
+    90% { bottom: 75%; opacity: 0.3; }
+}
+
+@keyframes raySpread {
+    0%, 100% { height: 0px; opacity: 0; }
+    20% { height: 80px; opacity: 0.7; }
+    50% { height: 140px; opacity: 0.9; }
+    80% { height: 60px; opacity: 0.4; }
+}
+
+/* Fading Stars */
+.sunrise-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%; /* Only in upper night sky */
+    pointer-events: none;
     z-index: 2;
 }
 
-/* More dramatic circular orbit */
-@keyframes sunriseOrbit {
-    0% {
-        transform: 
-            translate(-50%, -50%) 
-            rotate(0deg) 
-            translateX(50px) 
-            rotate(0deg);
-    }
-    25% {
-        transform: 
-            translate(-50%, -50%) 
-            rotate(90deg) 
-            translateX(50px) 
-            rotate(-90deg);
-    }
-    50% {
-        transform: 
-            translate(-50%, -50%) 
-            rotate(180deg) 
-            translateX(50px) 
-            rotate(-180deg);
-    }
-    75% {
-        transform: 
-            translate(-50%, -50%) 
-            rotate(270deg) 
-            translateX(50px) 
-            rotate(-270deg);
-    }
-    100% {
-        transform: 
-            translate(-50%, -50%) 
-            rotate(360deg) 
-            translateX(50px) 
-            rotate(-360deg);
-    }
-}
-
-/* Pulsing effect for more visibility */
-@keyframes sunPulse {
-    0%, 100% { 
-        transform: 
-            translate(-50%, -50%) 
-            rotate(0deg) 
-            translateX(50px) 
-            rotate(0deg)
-            scale(1);
-    }
-    50% { 
-        transform: 
-            translate(-50%, -50%) 
-            rotate(0deg) 
-            translateX(50px) 
-            rotate(0deg)
-            scale(1.2);
-    }
-}
-
-/* Glowing effect */
-@keyframes sunGlow {
-    0%, 100% { 
-        box-shadow: 
-            0 0 50px rgba(255, 215, 0, 1),
-            0 0 100px rgba(255, 140, 0, 0.8),
-            0 0 150px rgba(255, 69, 0, 0.6);
-    }
-    50% { 
-        box-shadow: 
-            0 0 70px rgba(255, 215, 0, 1),
-            0 0 140px rgba(255, 140, 0, 0.9),
-            0 0 200px rgba(255, 69, 0, 0.7);
-    }
-}
-
-/* Enhanced Sun Rays - More Visible */
-.sunrise-rays {
+.sunrise-star {
     position: absolute;
-    top: 0;
+    background: white;
+    border-radius: 50%;
+    animation: 
+        starTwinkle 4s ease-in-out infinite,
+        starsFade 30s ease-in-out infinite;
+}
+
+.sunrise-star:nth-child(1) { top: 15%; left: 20%; width: 2px; height: 2px; animation-delay: 0s, 0s; }
+.sunrise-star:nth-child(2) { top: 25%; left: 60%; width: 1.5px; height: 1.5px; animation-delay: 1s, 0s; }
+.sunrise-star:nth-child(3) { top: 40%; left: 35%; width: 1px; height: 1px; animation-delay: 2s, 0s; }
+.sunrise-star:nth-child(4) { top: 55%; left: 75%; width: 2px; height: 2px; animation-delay: 3s, 0s; }
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes starsFade {
+    0% { opacity: 1; }
+    30% { opacity: 0.5; }
+    50% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+/* Horizon Clouds */
+.horizon-clouds {
+    position: absolute;
+    bottom: 25%; /* Near horizon */
     left: 0;
     width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.sunrise-ray {
-    position: absolute;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 100, 0.8), 
-        rgba(255, 255, 50, 1), 
-        rgba(255, 255, 100, 0.8), 
-        transparent);
-    animation: sunriseRayMove 6s linear infinite;
-    opacity: 0.8;
-}
-
-.sunrise-ray:nth-child(1) { 
-    top: 15%; 
-    left: -50%; 
-    width: 200%; 
-    height: 3px; 
-    animation-delay: 0s; 
-}
-.sunrise-ray:nth-child(2) { 
-    top: 35%; 
-    left: -50%; 
-    width: 200%; 
-    height: 2px; 
-    animation-delay: 1s; 
-}
-.sunrise-ray:nth-child(3) { 
-    top: 55%; 
-    left: -50%; 
-    width: 200%; 
-    height: 2.5px; 
-    animation-delay: 2s; 
-}
-.sunrise-ray:nth-child(4) { 
-    top: 75%; 
-    left: -50%; 
-    width: 200%; 
-    height: 2px; 
-    animation-delay: 3s; 
-}
-.sunrise-ray:nth-child(5) { 
-    top: 25%; 
-    left: -50%; 
-    width: 200%; 
-    height: 1.5px; 
-    animation-delay: 4s; 
-}
-
-@keyframes sunriseRayMove {
-    0% { 
-        transform: translateX(0); 
-        opacity: 0; 
-    }
-    10% { 
-        opacity: 0.9; 
-    }
-    90% { 
-        opacity: 0.9; 
-    }
-    100% { 
-        transform: translateX(100%); 
-        opacity: 0; 
-    }
-}
-
-/* Rotating Sun Beams */
-.sun-beams {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120px;
-    height: 120px;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.sun-beam {
-    position: absolute;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 100, 0.6), 
-        transparent);
-    animation: beamRotate 8s linear infinite;
-    transform-origin: center;
-}
-
-.sun-beam:nth-child(1) { 
-    width: 3px; 
-    height: 120px; 
-    top: 0; 
-    left: 50%; 
-}
-.sun-beam:nth-child(2) { 
-    width: 3px; 
-    height: 120px; 
-    top: 0; 
-    left: 50%; 
-    transform: rotate(45deg); 
-}
-.sun-beam:nth-child(3) { 
-    width: 3px; 
-    height: 120px; 
-    top: 0; 
-    left: 50%; 
-    transform: rotate(90deg); 
-}
-.sun-beam:nth-child(4) { 
-    width: 3px; 
-    height: 120px; 
-    top: 0; 
-    left: 50%; 
-    transform: rotate(135deg); 
-}
-
-@keyframes beamRotate {
-    0% { 
-        transform: rotate(0deg); 
-        opacity: 0.7; 
-    }
-    100% { 
-        transform: rotate(360deg); 
-        opacity: 0.7; 
-    }
-}
-
-/* Cloud animation */
-.sunrise-clouds {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    height: 30%;
     pointer-events: none;
     overflow: hidden;
     z-index: 3;
 }
 
-.sunrise-cloud {
+.horizon-cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 50px;
-    animation: sunriseCloudFloat 25s linear infinite;
-    filter: blur(2px);
-    opacity: 0.9;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: horizonCloudFloat 40s linear infinite;
+    filter: blur(3px);
+    opacity: 0.8;
+    bottom: 0;
 }
 
-.sunrise-cloud::before, .sunrise-cloud::after {
+.horizon-cloud::before, .horizon-cloud::after {
     content: '';
     position: absolute;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
 }
 
-.sunrise-cloud:nth-child(1) {
-    top: 20%; 
-    left: -80px;
-    width: 60px; 
-    height: 25px;
-    animation-duration: 30s;
-}
-.sunrise-cloud:nth-child(1)::before { 
-    top: -10px; 
-    left: 8px; 
-    width: 30px; 
-    height: 30px; 
-}
-.sunrise-cloud:nth-child(1)::after { 
-    top: -8px; 
-    right: 8px; 
-    width: 25px; 
-    height: 25px; 
-}
-
-.sunrise-cloud:nth-child(2) {
-    top: 65%; 
-    left: -120px;
+.horizon-cloud:nth-child(1) {
+    left: -100px;
     width: 80px; 
     height: 30px;
-    animation-duration: 40s;
-    animation-delay: 8s;
+    animation-duration: 50s;
+    animation-delay: 0s;
 }
-.sunrise-cloud:nth-child(2)::before { 
+.horizon-cloud:nth-child(1)::before { 
     top: -12px; 
     left: 10px; 
     width: 35px; 
     height: 35px; 
 }
-.sunrise-cloud:nth-child(2)::after { 
+.horizon-cloud:nth-child(1)::after { 
     top: -10px; 
     right: 10px; 
     width: 30px; 
     height: 30px; 
 }
 
-@keyframes sunriseCloudFloat {
+.horizon-cloud:nth-child(2) {
+    left: -150px;
+    width: 60px; 
+    height: 25px;
+    animation-duration: 60s;
+    animation-delay: 20s;
+}
+.horizon-cloud:nth-child(2)::before { 
+    top: -10px; 
+    left: 8px; 
+    width: 30px; 
+    height: 30px; 
+}
+.horizon-cloud:nth-child(2)::after { 
+    top: -8px; 
+    right: 8px; 
+    width: 25px; 
+    height: 25px; 
+}
+
+@keyframes horizonCloudFloat {
     0% { 
-        transform: translateX(-150px); 
+        transform: translateX(-100px); 
         opacity: 0; 
     }
     10% { 
-        opacity: 0.9; 
+        opacity: 0.8; 
     }
     90% { 
-        opacity: 0.9; 
+        opacity: 0.8; 
     }
     100% { 
-        transform: translateX(calc(100% + 150px)); 
+        transform: translateX(calc(100% + 200px)); 
         opacity: 0; 
     }
 }
@@ -369,9 +365,8 @@
         padding-left: 15px;
     }
     
-    .sunrise-sun {
-        width: 50px;
-        height: 50px;
-        right: 20px;
+    .rising-sun {
+        width: 60px;
+        height: 60px;
     }
 }
