@@ -296,53 +296,62 @@ createAnimations: function() {
         }
     }
 
-        // Sunrise animations
-    const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
-        if (sunriseCard) {
-            console.log('🌅 Creating Sunrise animations');
-            
-            // Create sun element
-            if (!sunriseCard.querySelector('.sunrise-sun')) {
-                const sunElement = document.createElement('div');
-                sunElement.className = 'sunrise-sun';
-                sunriseCard.appendChild(sunElement);
-            }
-            
-            // Create sun rays
-            if (!sunriseCard.querySelector('.sunrise-rays')) {
-                const sunRays = document.createElement('div');
-                sunRays.className = 'sunrise-rays';
-                for (let i = 0; i < 4; i++) {
-                    const ray = document.createElement('div');
-                    ray.className = 'sunrise-ray';
-                    sunRays.appendChild(ray);
-                }
-                sunriseCard.appendChild(sunRays);
-            }
-             // Add rotating sun beams
-            if (!sunriseCard.querySelector('.sun-beams')) {
-                const sunBeams = document.createElement('div');
-                sunBeams.className = 'sun-beams';
-                for (let i = 0; i < 4; i++) {
-                    const beam = document.createElement('div');
-                    beam.className = 'sun-beam';
-                    sunBeams.appendChild(beam);
-                }
-                sunriseCard.appendChild(sunBeams);
-            }
+                    // Sunrise animations
+                    // Realistic Sunrise animations
+            const sunriseCard = document.querySelector('.prayer-card[data-prayer="Sunrise"]');
+            if (sunriseCard) {
+                console.log('🌅 Creating realistic Sunrise animations');
                 
-        // Create clouds
-        if (!sunriseCard.querySelector('.sunrise-clouds')) {
-            const clouds = document.createElement('div');
-            clouds.className = 'sunrise-clouds';
-            for (let i = 0; i < 2; i++) {
-                const cloud = document.createElement('div');
-                cloud.className = 'sunrise-cloud';
-                clouds.appendChild(cloud);
+                // Create horizon line
+                if (!sunriseCard.querySelector('.sunrise-horizon')) {
+                    const horizon = document.createElement('div');
+                    horizon.className = 'sunrise-horizon';
+                    sunriseCard.appendChild(horizon);
+                }
+                
+                // Create rising sun
+                if (!sunriseCard.querySelector('.rising-sun')) {
+                    const sunElement = document.createElement('div');
+                    sunElement.className = 'rising-sun';
+                    sunriseCard.appendChild(sunElement);
+                }
+                
+                // Create sun rays
+                if (!sunriseCard.querySelector('.sun-rays')) {
+                    const sunRays = document.createElement('div');
+                    sunRays.className = 'sun-rays';
+                    for (let i = 0; i < 5; i++) {
+                        const ray = document.createElement('div');
+                        ray.className = 'sun-ray';
+                        sunRays.appendChild(ray);
+                    }
+                    sunriseCard.appendChild(sunRays);
+                }
+                
+                // Create fading stars
+                if (!sunriseCard.querySelector('.sunrise-stars')) {
+                    const stars = document.createElement('div');
+                    stars.className = 'sunrise-stars';
+                    for (let i = 0; i < 4; i++) {
+                        const star = document.createElement('div');
+                        star.className = 'sunrise-star';
+                        stars.appendChild(star);
+                    }
+                    sunriseCard.appendChild(stars);
+                }
+                
+                // Create horizon clouds
+                if (!sunriseCard.querySelector('.horizon-clouds')) {
+                    const clouds = document.createElement('div');
+                    clouds.className = 'horizon-clouds';
+                    for (let i = 0; i < 2; i++) {
+                        const cloud = document.createElement('div');
+                        cloud.className = 'horizon-cloud';
+                        clouds.appendChild(cloud);
+                    }
+                    sunriseCard.appendChild(clouds);
+                }
             }
-            sunriseCard.appendChild(clouds);
-        }
-    }
     
         // Dhuhr animations
         const dhuhrCard = document.querySelector('.prayer-card[data-prayer="Dhuhr"]');
