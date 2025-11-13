@@ -1,4 +1,4 @@
-/* SUNRISE STYLES - FIXED SUN POSITION */
+/* SUNRISE STYLES - ENHANCED VISIBLE ANIMATION */
 .prayer-card[data-prayer="Sunrise"] {
     background: linear-gradient(135deg, 
         #ff6b35 0%, 
@@ -38,73 +38,109 @@
     position: relative;
 }
 
-/* Fixed Sun Position - Circular Motion */
+/* ENHANCED Sun - More Visible Animation */
 .sunrise-sun {
     position: absolute;
     top: 50%;
     right: 30px;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background: radial-gradient(circle, 
-        #FFD700 0%, 
-        #FF8C00 30%, 
+        #FFFF00 0%, 
+        #FFD700 20%, 
+        #FF8C00 40%, 
         #FF4500 60%, 
         transparent 80%);
     border-radius: 50%;
-    animation: sunriseOrbit 20s linear infinite;
+    animation: 
+        sunriseOrbit 15s linear infinite,
+        sunPulse 3s ease-in-out infinite,
+        sunGlow 4s ease-in-out infinite;
     box-shadow: 
-        0 0 40px rgba(255, 215, 0, 0.8),
-        0 0 80px rgba(255, 140, 0, 0.6),
-        0 0 120px rgba(255, 69, 0, 0.4);
-    filter: brightness(1.2);
+        0 0 50px rgba(255, 215, 0, 1),
+        0 0 100px rgba(255, 140, 0, 0.8),
+        0 0 150px rgba(255, 69, 0, 0.6),
+        inset 0 0 20px rgba(255, 255, 255, 0.8);
+    filter: brightness(1.5) contrast(1.2);
     z-index: 2;
 }
 
-/* Circular orbit animation - like a clock */
+/* More dramatic circular orbit */
 @keyframes sunriseOrbit {
     0% {
         transform: 
             translate(-50%, -50%) 
             rotate(0deg) 
-            translateX(40px) 
+            translateX(50px) 
             rotate(0deg);
-        opacity: 0.8;
     }
     25% {
         transform: 
             translate(-50%, -50%) 
             rotate(90deg) 
-            translateX(40px) 
+            translateX(50px) 
             rotate(-90deg);
-        opacity: 1;
     }
     50% {
         transform: 
             translate(-50%, -50%) 
             rotate(180deg) 
-            translateX(40px) 
+            translateX(50px) 
             rotate(-180deg);
-        opacity: 0.9;
     }
     75% {
         transform: 
             translate(-50%, -50%) 
             rotate(270deg) 
-            translateX(40px) 
+            translateX(50px) 
             rotate(-270deg);
-        opacity: 1;
     }
     100% {
         transform: 
             translate(-50%, -50%) 
             rotate(360deg) 
-            translateX(40px) 
+            translateX(50px) 
             rotate(-360deg);
-        opacity: 0.8;
     }
 }
 
-/* Sun rays animation */
+/* Pulsing effect for more visibility */
+@keyframes sunPulse {
+    0%, 100% { 
+        transform: 
+            translate(-50%, -50%) 
+            rotate(0deg) 
+            translateX(50px) 
+            rotate(0deg)
+            scale(1);
+    }
+    50% { 
+        transform: 
+            translate(-50%, -50%) 
+            rotate(0deg) 
+            translateX(50px) 
+            rotate(0deg)
+            scale(1.2);
+    }
+}
+
+/* Glowing effect */
+@keyframes sunGlow {
+    0%, 100% { 
+        box-shadow: 
+            0 0 50px rgba(255, 215, 0, 1),
+            0 0 100px rgba(255, 140, 0, 0.8),
+            0 0 150px rgba(255, 69, 0, 0.6);
+    }
+    50% { 
+        box-shadow: 
+            0 0 70px rgba(255, 215, 0, 1),
+            0 0 140px rgba(255, 140, 0, 0.9),
+            0 0 200px rgba(255, 69, 0, 0.7);
+    }
+}
+
+/* Enhanced Sun Rays - More Visible */
 .sunrise-rays {
     position: absolute;
     top: 0;
@@ -117,38 +153,50 @@
 
 .sunrise-ray {
     position: absolute;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-    animation: sunriseRayMove 8s linear infinite;
-    opacity: 0.7;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 100, 0.8), 
+        rgba(255, 255, 50, 1), 
+        rgba(255, 255, 100, 0.8), 
+        transparent);
+    animation: sunriseRayMove 6s linear infinite;
+    opacity: 0.8;
 }
 
 .sunrise-ray:nth-child(1) { 
-    top: 20%; 
+    top: 15%; 
     left: -50%; 
     width: 200%; 
-    height: 2px; 
+    height: 3px; 
     animation-delay: 0s; 
 }
 .sunrise-ray:nth-child(2) { 
-    top: 40%; 
+    top: 35%; 
     left: -50%; 
     width: 200%; 
-    height: 1px; 
-    animation-delay: 2s; 
+    height: 2px; 
+    animation-delay: 1s; 
 }
 .sunrise-ray:nth-child(3) { 
-    top: 60%; 
+    top: 55%; 
+    left: -50%; 
+    width: 200%; 
+    height: 2.5px; 
+    animation-delay: 2s; 
+}
+.sunrise-ray:nth-child(4) { 
+    top: 75%; 
+    left: -50%; 
+    width: 200%; 
+    height: 2px; 
+    animation-delay: 3s; 
+}
+.sunrise-ray:nth-child(5) { 
+    top: 25%; 
     left: -50%; 
     width: 200%; 
     height: 1.5px; 
     animation-delay: 4s; 
-}
-.sunrise-ray:nth-child(4) { 
-    top: 80%; 
-    left: -50%; 
-    width: 200%; 
-    height: 1px; 
-    animation-delay: 6s; 
 }
 
 @keyframes sunriseRayMove {
@@ -156,12 +204,75 @@
         transform: translateX(0); 
         opacity: 0; 
     }
-    50% { 
-        opacity: 0.7; 
+    10% { 
+        opacity: 0.9; 
+    }
+    90% { 
+        opacity: 0.9; 
     }
     100% { 
         transform: translateX(100%); 
         opacity: 0; 
+    }
+}
+
+/* Rotating Sun Beams */
+.sun-beams {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.sun-beam {
+    position: absolute;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 100, 0.6), 
+        transparent);
+    animation: beamRotate 8s linear infinite;
+    transform-origin: center;
+}
+
+.sun-beam:nth-child(1) { 
+    width: 3px; 
+    height: 120px; 
+    top: 0; 
+    left: 50%; 
+}
+.sun-beam:nth-child(2) { 
+    width: 3px; 
+    height: 120px; 
+    top: 0; 
+    left: 50%; 
+    transform: rotate(45deg); 
+}
+.sun-beam:nth-child(3) { 
+    width: 3px; 
+    height: 120px; 
+    top: 0; 
+    left: 50%; 
+    transform: rotate(90deg); 
+}
+.sun-beam:nth-child(4) { 
+    width: 3px; 
+    height: 120px; 
+    top: 0; 
+    left: 50%; 
+    transform: rotate(135deg); 
+}
+
+@keyframes beamRotate {
+    0% { 
+        transform: rotate(0deg); 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: rotate(360deg); 
+        opacity: 0.7; 
     }
 }
 
@@ -174,79 +285,80 @@
     height: 100%;
     pointer-events: none;
     overflow: hidden;
-    z-index: 1;
+    z-index: 3;
 }
 
 .sunrise-cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 50px;
-    animation: sunriseCloudFloat 20s linear infinite;
-    filter: blur(1px);
-    opacity: 0.8;
+    animation: sunriseCloudFloat 25s linear infinite;
+    filter: blur(2px);
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .sunrise-cloud::before, .sunrise-cloud::after {
     content: '';
     position: absolute;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 50%;
 }
 
 .sunrise-cloud:nth-child(1) {
     top: 20%; 
-    left: -50px;
-    width: 40px; 
-    height: 20px;
-    animation-duration: 25s;
-}
-.sunrise-cloud:nth-child(1)::before { 
-    top: -8px; 
-    left: 5px; 
-    width: 25px; 
-    height: 25px; 
-}
-.sunrise-cloud:nth-child(1)::after { 
-    top: -5px; 
-    right: 5px; 
-    width: 20px; 
-    height: 20px; 
-}
-
-.sunrise-cloud:nth-child(2) {
-    top: 60%; 
     left: -80px;
     width: 60px; 
     height: 25px;
     animation-duration: 30s;
-    animation-delay: 5s;
 }
-.sunrise-cloud:nth-child(2)::before { 
+.sunrise-cloud:nth-child(1)::before { 
     top: -10px; 
     left: 8px; 
     width: 30px; 
     height: 30px; 
 }
-.sunrise-cloud:nth-child(2)::after { 
+.sunrise-cloud:nth-child(1)::after { 
     top: -8px; 
     right: 8px; 
     width: 25px; 
     height: 25px; 
 }
 
+.sunrise-cloud:nth-child(2) {
+    top: 65%; 
+    left: -120px;
+    width: 80px; 
+    height: 30px;
+    animation-duration: 40s;
+    animation-delay: 8s;
+}
+.sunrise-cloud:nth-child(2)::before { 
+    top: -12px; 
+    left: 10px; 
+    width: 35px; 
+    height: 35px; 
+}
+.sunrise-cloud:nth-child(2)::after { 
+    top: -10px; 
+    right: 10px; 
+    width: 30px; 
+    height: 30px; 
+}
+
 @keyframes sunriseCloudFloat {
     0% { 
-        transform: translateX(-100px); 
+        transform: translateX(-150px); 
         opacity: 0; 
     }
     10% { 
-        opacity: 0.8; 
+        opacity: 0.9; 
     }
     90% { 
-        opacity: 0.8; 
+        opacity: 0.9; 
     }
     100% { 
-        transform: translateX(calc(100% + 100px)); 
+        transform: translateX(calc(100% + 150px)); 
         opacity: 0; 
     }
 }
@@ -258,8 +370,8 @@
     }
     
     .sunrise-sun {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         right: 20px;
     }
 }
